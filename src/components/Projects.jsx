@@ -8,7 +8,7 @@ const Projects = () => {
         "Comprehensive web platform for UITS ACI Student Chapter - a professional civil engineering community website.",
       tech: ["React.js", "Firebase", "Sanity CMS", "Tailwind CSS"],
       link: "https://aciuits.netlify.app",
-      icon: "🏗️",
+      icon: "/Image/ACI_UITS.ico",
     },
     {
       title: "PetPals",
@@ -32,7 +32,17 @@ const Projects = () => {
               key={index}
               className="group bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 hover:border-cyan-500 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20"
             >
-              <div className="text-5xl mb-4">{project.icon}</div>
+              <div className="text-5xl mb-4">
+                {project.icon.startsWith("/") ? (
+                  <img
+                    src={project.icon}
+                    alt={project.title}
+                    className="w-16 h-16 object-contain"
+                  />
+                ) : (
+                  project.icon
+                )}
+              </div>
               <h3 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors mb-3">
                 {project.title}
               </h3>

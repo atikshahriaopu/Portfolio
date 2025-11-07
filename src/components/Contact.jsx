@@ -1,5 +1,5 @@
 import React from "react";
-import { Github, Linkedin, Facebook, Mail } from "lucide-react";
+import { Github, Linkedin, Facebook, Mail, Twitter } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -48,6 +48,14 @@ const Contact = () => {
             className="p-4 bg-slate-800 rounded-full hover:bg-blue-500 transition-all hover:scale-110"
           >
             <Facebook size={28} />
+          </a>
+          <a
+            href="https://twitter.com/shariar_opu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 bg-slate-800 rounded-full hover:bg-sky-500 transition-all hover:scale-110"
+          >
+            <Twitter size={28} />
           </a>
         </div>
       </div>
