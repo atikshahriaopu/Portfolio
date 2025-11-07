@@ -12,14 +12,13 @@ const Navbar = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
-            {"<Atik />"}
+            {"<atikshahriaopu />"}
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
             {[
               "Home",
-              "About",
               "Skills",
               "Experience",
               "Education",
@@ -56,7 +55,6 @@ const Navbar = ({
           <div className="px-2 pt-2 pb-3 space-y-1">
             {[
               "Home",
-              "About",
               "Skills",
               "Experience",
               "Education",
