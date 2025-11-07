@@ -50,7 +50,7 @@ const Contact = () => {
             <Facebook size={28} />
           </a>
           <a
-            href="https://twitter.com/shariar_opu"
+            href="https://x.com/atikshahriaopu"
             target="_blank"
             rel="noopener noreferrer"
             className="p-4 bg-slate-800 rounded-full hover:bg-sky-500 transition-all hover:scale-110"
