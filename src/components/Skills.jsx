@@ -4,28 +4,28 @@ const Skills = () => {
   const skillCategories = [
     {
       category: "Languages",
-      icon: "💻",
+      icon: "/Image/code.png",
       tags: ["C", "C++", "JavaScript"],
       gradient: "from-blue-500 to-cyan-500",
       glowColor: "cyan-500/50",
     },
     {
       category: "Frameworks",
-      icon: "🧩",
+      icon: "/Image/framwork.png",
       tags: ["Node.js", "React"],
       gradient: "from-purple-500 to-pink-500",
       glowColor: "purple-500/50",
     },
     {
       category: "Database",
-      icon: "🗄️",
+      icon: "/Image/database.png",
       tags: ["MongoDB", "Firebase"],
       gradient: "from-green-500 to-emerald-500",
       glowColor: "green-500/50",
     },
     {
       category: "Domain",
-      icon: "🎓",
+      icon: "/Image/domain.png",
       tags: ["OOP", "Algorithms", "Problem Solving", "DSA"],
       gradient: "from-orange-500 to-red-500",
       glowColor: "orange-500/50",
@@ -86,7 +86,16 @@ const Skills = () => {
                   <div
                     className={`text-5xl mb-3 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 filter drop-shadow-lg`}
                   >
-                    {category.icon}
+                    {typeof category.icon === "string" &&
+                    category.icon.startsWith("/") ? (
+                      <img
+                        src={category.icon}
+                        alt={category.category}
+                        className="w-16 h-16 object-contain"
+                      />
+                    ) : (
+                      category.icon
+                    )}
                   </div>
 
                   {/* Title */}
