@@ -165,17 +165,8 @@ const Experience = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16"
         >
-          <div className="relative group">
-            {/* Glowing border effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
-            
-            <div className="relative glass-effect rounded-3xl p-10 sm:p-12 border-2 border-solarized-blue/40 bg-gradient-to-br from-solarized-base03/95 via-solarized-base02/90 to-solarized-base03/95 overflow-hidden">
-              {/* Animated background elements */}
-              <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-                <div className="absolute -top-24 -left-24 w-48 h-48 bg-solarized-cyan/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-solarized-violet/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-              </div>
-
+          <div className="relative">
+            <div className="glass-effect rounded-3xl p-10 sm:p-12 border-2 border-solarized-blue/40 bg-gradient-to-br from-solarized-base03/95 via-solarized-base02/90 to-solarized-base03/95 overflow-hidden">
               <h3 className="text-center text-2xl sm:text-3xl font-bold mb-10 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent relative z-10">
                 Competitive Programming Stats
               </h3>
