@@ -1,5 +1,3 @@
-import React from "react";
-
 const About = () => {
   return (
     <section id="about" className="py-16 sm:py-20 px-4 sm:px-6">
@@ -9,7 +7,7 @@ const About = () => {
         </h2>
         <div className="bg-solarized-base02/90 rounded-lg p-6 sm:p-8 border border-solarized-base01 hover:border-solarized-blue transition-all duration-500 hover:bg-solarized-blue/10">
           <p className="text-sm sm:text-base text-solarized-base0 leading-relaxed mb-4 sm:mb-6">
-            I'm{" "}
+            I&apos;m{" "}
             <span className="text-solarized-cyan font-semibold">
               Atik Shahria Opu
             </span>
@@ -24,8 +22,8 @@ const About = () => {
               1200+ problems solved
             </span>{" "}
             across multiple platforms including Codeforces, LeetCode, CodeChef,
-            UVA, LightOJ, SPOJ, and, CSS I've honed my problem-solving skills
-            through participation in{" "}
+            UVA, LightOJ, SPOJ, and, CSS I&apos;ve honed my problem-solving
+            skills through participation in{" "}
             <span className="text-solarized-cyan font-semibold">
               100+ programming contests
             </span>
@@ -35,7 +33,7 @@ const About = () => {
           <p className="text-sm sm:text-base text-solarized-base0 leading-relaxed">
             I specialize in building modern web applications using React,
             Node.js, and MongoDB, with a keen interest in AI-driven development
-            and scalable architectures. Beyond coding, I'm passionate about
+            and scalable architectures. Beyond coding, I&apos;m passionate about
             mentoring junior students in competitive programming and helping
             them develop strong algorithmic thinking.
           </p>

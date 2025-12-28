@@ -1,4 +1,3 @@
-import React from "react";
 import { BookOpen, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
@@ -14,7 +13,11 @@ const Education = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="education" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="education"
+      className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-blue/5 rounded-full blur-3xl"></div>
@@ -22,11 +25,11 @@ const Education = () => {
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: -20 }
               : animationState === "static"
@@ -42,8 +45,8 @@ const Education = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: 20 }
               : animationState === "static"
@@ -59,11 +62,11 @@ const Education = () => {
 
             <div className="relative z-10 flex flex-col sm:flex-row items-start gap-5 sm:gap-6 md:gap-8">
               {/* Icon */}
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0.8, rotate: -10 }}
                 animate={
-                  animationState === "visible" 
-                    ? { scale: 1, rotate: 0 } 
+                  animationState === "visible"
+                    ? { scale: 1, rotate: 0 }
                     : animationState === "fadeOut"
                     ? { scale: 0.8, rotate: -10 }
                     : animationState === "static"
@@ -73,16 +76,19 @@ const Education = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="bg-gradient-to-br from-solarized-blue via-solarized-cyan to-solarized-green p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-2xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex-shrink-0"
               >
-                <GraduationCap size={32} className="text-solarized-base2 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+                <GraduationCap
+                  size={32}
+                  className="text-solarized-base2 sm:w-10 sm:h-10 md:w-12 md:h-12"
+                />
               </motion.div>
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <motion.h3 
+                <motion.h3
                   initial={{ opacity: 0, x: -20 }}
                   animate={
-                    animationState === "visible" 
-                      ? { opacity: 1, x: 0 } 
+                    animationState === "visible"
+                      ? { opacity: 1, x: 0 }
                       : animationState === "fadeOut"
                       ? { opacity: 0, x: -20 }
                       : animationState === "static"
@@ -95,11 +101,11 @@ const Education = () => {
                   BSc in Computer Science & Engineering
                 </motion.h3>
 
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, x: -20 }}
                   animate={
-                    animationState === "visible" 
-                      ? { opacity: 1, x: 0 } 
+                    animationState === "visible"
+                      ? { opacity: 1, x: 0 }
                       : animationState === "fadeOut"
                       ? { opacity: 0, x: -20 }
                       : animationState === "static"
@@ -110,14 +116,16 @@ const Education = () => {
                   className="text-solarized-cyan font-semibold text-base sm:text-lg md:text-xl mb-2 sm:mb-3 flex items-center gap-2"
                 >
                   <BookOpen size={18} className="flex-shrink-0 sm:w-5 sm:h-5" />
-                  <span className="break-words">University of Information Technology & Sciences (UITS)</span>
+                  <span className="break-words">
+                    University of Information Technology & Sciences (UITS)
+                  </span>
                 </motion.p>
 
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, x: -20 }}
                   animate={
-                    animationState === "visible" 
-                      ? { opacity: 1, x: 0 } 
+                    animationState === "visible"
+                      ? { opacity: 1, x: 0 }
                       : animationState === "fadeOut"
                       ? { opacity: 0, x: -20 }
                       : animationState === "static"
@@ -130,11 +138,11 @@ const Education = () => {
                   Dhaka, Bangladesh • Expected Graduation: 2026
                 </motion.p>
 
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={
-                    animationState === "visible" 
-                      ? { opacity: 1, y: 0 } 
+                    animationState === "visible"
+                      ? { opacity: 1, y: 0 }
                       : animationState === "fadeOut"
                       ? { opacity: 0, y: 20 }
                       : animationState === "static"

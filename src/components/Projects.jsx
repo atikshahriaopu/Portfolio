@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
@@ -73,7 +72,11 @@ const Projects = () => {
   };
 
   return (
-    <section ref={sectionRef} id="projects" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-magenta/5 rounded-full blur-3xl"></div>
@@ -81,11 +84,11 @@ const Projects = () => {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: -20 }
               : animationState === "static"
@@ -98,7 +101,7 @@ const Projects = () => {
           Featured Projects
         </motion.h2>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={animationState}
@@ -112,9 +115,7 @@ const Projects = () => {
             >
               <div className="relative glass-effect rounded-2xl p-5 sm:p-6 md:p-8 border border-solarized-base01 hover:border-solarized-blue transition-all duration-500 hover:scale-105 h-full flex flex-col">
                 {/* Gradient glow */}
-                <div
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-                ></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
@@ -160,25 +161,24 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className={`inline-flex items-center gap-2 text-base sm:text-lg font-semibold bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent hover:scale-105 transition-transform duration-300`}
                     >
-                      View Project <ExternalLink size={18} className="sm:w-5 sm:h-5" />
+                      View Project{" "}
+                      <ExternalLink size={18} className="sm:w-5 sm:h-5" />
                     </a>
                   )}
                 </div>
 
                 {/* Corner decoration */}
-                <div
-                  className="absolute -top-3 -right-3 w-24 h-24 bg-solarized-base01 opacity-0 group-hover:opacity-30 rounded-full blur-2xl transition-all duration-500"
-                ></div>
+                <div className="absolute -top-3 -right-3 w-24 h-24 bg-solarized-base01 opacity-0 group-hover:opacity-30 rounded-full blur-2xl transition-all duration-500"></div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: 20 }
               : animationState === "static"

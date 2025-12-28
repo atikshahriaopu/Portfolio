@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Github, Users, GitFork } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
@@ -29,9 +29,10 @@ const GitHub = () => {
         }
         const userData = await userRes.json();
         setUserData(userData);
-        
+
         // Get total repo count
-        const totalRepos = (userData.public_repos || 0) + (userData.total_private_repos || 0);
+        const totalRepos =
+          (userData.public_repos || 0) + (userData.total_private_repos || 0);
         setRepoCount(totalRepos);
         setPublicRepos(userData.public_repos || 0);
 
@@ -39,13 +40,13 @@ const GitHub = () => {
         const now = new Date();
         const currentYear = now.getFullYear();
         const currentMonth = now.getMonth(); // 0-11
-        
+
         // Calculate start date (12 months ago from current month)
         const startDate = new Date(currentYear, currentMonth - 11, 1);
         const endDate = new Date(currentYear, currentMonth + 1, 0); // Last day of current month
-        
-        const fromDate = startDate.toISOString().split('T')[0] + 'T00:00:00Z';
-        const toDate = endDate.toISOString().split('T')[0] + 'T23:59:59Z';
+
+        const fromDate = startDate.toISOString().split("T")[0] + "T00:00:00Z";
+        const toDate = endDate.toISOString().split("T")[0] + "T23:59:59Z";
 
         // Check cache first
         const cacheKey = `${CACHE_KEY}_12months_${fromDate}`;
@@ -83,8 +84,8 @@ const GitHub = () => {
           variables: {
             username,
             from: fromDate,
-            to: toDate
-          }
+            to: toDate,
+          },
         };
 
         const headers = {
@@ -106,14 +107,17 @@ const GitHub = () => {
         }
 
         const graphqlData = await graphqlRes.json();
-        
+
         if (graphqlData.errors) {
           console.error("GraphQL errors:", graphqlData.errors);
-          throw new Error(graphqlData.errors[0]?.message || "GraphQL query failed");
+          throw new Error(
+            graphqlData.errors[0]?.message || "GraphQL query failed"
+          );
         }
 
-        const contributionCalendar = graphqlData.data?.user?.contributionsCollection?.contributionCalendar;
-        
+        const contributionCalendar =
+          graphqlData.data?.user?.contributionsCollection?.contributionCalendar;
+
         if (!contributionCalendar) {
           throw new Error("No contribution data available");
         }
@@ -125,10 +129,10 @@ const GitHub = () => {
           data: {
             userData,
             repoCount: totalRepos,
-            contributionData: contributionCalendar
+            contributionData: contributionCalendar,
           },
           timestamp: Date.now(),
-          dateRange: { fromDate, toDate }
+          dateRange: { fromDate, toDate },
         };
         localStorage.setItem(cacheKey, JSON.stringify(cacheData));
 
@@ -156,27 +160,40 @@ const GitHub = () => {
 
   const getMonthLabels = (weeks) => {
     if (!weeks) return [];
-    
+
     const monthLabels = [];
     let currentMonth = -1;
-    
+
     weeks.forEach((week, weekIndex) => {
       if (week.contributionDays && week.contributionDays.length > 0) {
         const firstDay = week.contributionDays[0];
         const date = new Date(firstDay.date);
         const month = date.getMonth();
-        
+
         if (month !== currentMonth && weekIndex > 0) {
-          const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          const monthNames = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
           monthLabels.push({
             name: monthNames[month],
-            weekIndex: weekIndex
+            weekIndex: weekIndex,
           });
           currentMonth = month;
         }
       }
     });
-    
+
     return monthLabels;
   };
 
@@ -186,7 +203,11 @@ const GitHub = () => {
   };
 
   return (
-    <section ref={sectionRef} id="github" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="github"
+      className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-blue/5 rounded-full blur-3xl"></div>
@@ -195,11 +216,11 @@ const GitHub = () => {
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: -20 }
               : animationState === "static"
@@ -226,20 +247,23 @@ const GitHub = () => {
           </div>
         ) : error ? (
           <div className="bg-gradient-to-br from-solarized-red/20 to-solarized-orange/20 backdrop-blur-sm border border-solarized-red/20 rounded-xl p-8 text-center">
-            <p className="text-solarized-red mb-2">Failed to load GitHub data</p>
+            <p className="text-solarized-red mb-2">
+              Failed to load GitHub data
+            </p>
             <p className="text-solarized-base00 text-sm">{error}</p>
             {!GITHUB_TOKEN && (
               <p className="text-solarized-yellow text-sm mt-4">
-                Tip: Add VITE_GITHUB_TOKEN to your .env file to avoid API rate limits
+                Tip: Add VITE_GITHUB_TOKEN to your .env file to avoid API rate
+                limits
               </p>
             )}
           </div>
         ) : (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={
-              animationState === "visible" 
-                ? { opacity: 1 } 
+              animationState === "visible"
+                ? { opacity: 1 }
                 : animationState === "fadeOut"
                 ? { opacity: 0 }
                 : animationState === "static"
@@ -250,11 +274,11 @@ const GitHub = () => {
             className="space-y-4"
           >
             {/* Stats Cards */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={
-                animationState === "visible" 
-                  ? { opacity: 1, y: 0 } 
+                animationState === "visible"
+                  ? { opacity: 1, y: 0 }
                   : animationState === "fadeOut"
                   ? { opacity: 0, y: 20 }
                   : animationState === "static"
@@ -268,8 +292,12 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-blue/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Users className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-cyan" />
-                  <p className="text-solarized-base00 text-xs sm:text-sm">Followers</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">{userData?.followers || 0}</p>
+                  <p className="text-solarized-base00 text-xs sm:text-sm">
+                    Followers
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                    {userData?.followers || 0}
+                  </p>
                 </div>
               </div>
 
@@ -277,8 +305,12 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-green/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Users className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-green" />
-                  <p className="text-solarized-base00 text-xs sm:text-sm">Following</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">{userData?.following || 0}</p>
+                  <p className="text-solarized-base00 text-xs sm:text-sm">
+                    Following
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                    {userData?.following || 0}
+                  </p>
                 </div>
               </div>
 
@@ -286,8 +318,12 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-violet/10 to-solarized-magenta/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <GitFork className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-violet" />
-                  <p className="text-solarized-base00 text-xs sm:text-sm">Public Repos</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">{publicRepos}</p>
+                  <p className="text-solarized-base00 text-xs sm:text-sm">
+                    Public Repos
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                    {publicRepos}
+                  </p>
                 </div>
               </div>
 
@@ -295,18 +331,22 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-orange/10 to-solarized-red/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Github className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-orange" />
-                  <p className="text-solarized-base00 text-xs sm:text-sm">Total Repos</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">{repoCount}</p>
+                  <p className="text-solarized-base00 text-xs sm:text-sm">
+                    Total Repos
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                    {repoCount}
+                  </p>
                 </div>
               </div>
             </motion.div>
 
             {/* Contribution Calendar */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={
-                animationState === "visible" 
-                  ? { opacity: 1, y: 0 } 
+                animationState === "visible"
+                  ? { opacity: 1, y: 0 }
                   : animationState === "fadeOut"
                   ? { opacity: 0, y: 20 }
                   : animationState === "static"
@@ -319,9 +359,10 @@ const GitHub = () => {
               {/* Title and Legend */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-3 sm:mb-4">
                 <h3 className="text-xs sm:text-sm md:text-base font-semibold text-solarized-base2">
-                  {getTotalContributions().toLocaleString()} contributions in the last 12 months
+                  {getTotalContributions().toLocaleString()} contributions in
+                  the last 12 months
                 </h3>
-                
+
                 {/* Legend */}
                 <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] text-solarized-base00">
                   <span>Less</span>
@@ -342,19 +383,25 @@ const GitHub = () => {
                   <div className="w-full">
                     {/* Month Labels */}
                     <div className="relative h-5 mb-1 w-full">
-                      {getMonthLabels(contributionData.current.weeks).map((month, index) => (
-                        <div
-                          key={index}
-                          className="absolute text-[10px] md:text-xs text-solarized-base01 font-medium"
-                          style={{
-                            left: `${(month.weekIndex / contributionData.current.weeks.length) * 100}%`,
-                          }}
-                        >
-                          {month.name}
-                        </div>
-                      ))}
+                      {getMonthLabels(contributionData.current.weeks).map(
+                        (month, index) => (
+                          <div
+                            key={index}
+                            className="absolute text-[10px] md:text-xs text-solarized-base01 font-medium"
+                            style={{
+                              left: `${
+                                (month.weekIndex /
+                                  contributionData.current.weeks.length) *
+                                100
+                              }%`,
+                            }}
+                          >
+                            {month.name}
+                          </div>
+                        )
+                      )}
                     </div>
-                    
+
                     {/* Contribution Grid */}
                     <div className="flex gap-1 w-full justify-between">
                       {contributionData.current.weeks.map((week, weekIndex) => (
@@ -365,14 +412,28 @@ const GitHub = () => {
                               className={`w-[10px] h-[10px] rounded-[1px] ${getContributionColor(
                                 day.contributionLevel
                               )} hover:ring-1 hover:ring-solarized-cyan/50 transition-all cursor-pointer group relative`}
-                              title={`${day.contributionCount} contributions on ${new Date(
+                              title={`${
+                                day.contributionCount
+                              } contributions on ${new Date(
                                 day.date
                               ).toLocaleDateString()}`}
                             >
                               {/* Tooltip */}
                               <div className="opacity-0 group-hover:opacity-100 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-solarized-base03 border border-solarized-blue/30 text-solarized-base2 text-xs rounded whitespace-nowrap pointer-events-none z-20 shadow-lg">
-                                <div className="font-semibold">{day.contributionCount} contributions</div>
-                                <div className="text-solarized-base00">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</div>
+                                <div className="font-semibold">
+                                  {day.contributionCount} contributions
+                                </div>
+                                <div className="text-solarized-base00">
+                                  {new Date(day.date).toLocaleDateString(
+                                    "en-US",
+                                    {
+                                      weekday: "short",
+                                      month: "short",
+                                      day: "numeric",
+                                      year: "numeric",
+                                    }
+                                  )}
+                                </div>
                               </div>
                             </div>
                           ))}

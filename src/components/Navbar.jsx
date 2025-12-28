@@ -1,5 +1,5 @@
-import React from "react";
 import { Menu, X } from "lucide-react";
+import PropTypes from "prop-types";
 
 const Navbar = ({
   isMenuOpen,
@@ -25,7 +25,8 @@ const Navbar = ({
               "Projects",
               "Contact",
             ].map((item) => {
-              const sectionId = item === "Achivments" ? "experience" : item.toLowerCase();
+              const sectionId =
+                item === "Achivments" ? "experience" : item.toLowerCase();
               return (
                 <button
                   key={item}
@@ -64,7 +65,8 @@ const Navbar = ({
               "Projects",
               "Contact",
             ].map((item) => {
-              const sectionId = item === "Achivments" ? "experience" : item.toLowerCase();
+              const sectionId =
+                item === "Achivments" ? "experience" : item.toLowerCase();
               return (
                 <button
                   key={item}
@@ -84,6 +86,13 @@ const Navbar = ({
       )}
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+  activeSection: PropTypes.string.isRequired,
+  scrollToSection: PropTypes.func.isRequired,
 };
 
 export default Navbar;

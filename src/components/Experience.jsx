@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
@@ -79,7 +78,11 @@ const Experience = () => {
   };
 
   return (
-    <section ref={sectionRef} id="experience" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="experience"
+      className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-blue/5 rounded-full blur-3xl"></div>
@@ -87,11 +90,11 @@ const Experience = () => {
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: -20 }
               : animationState === "static"
@@ -104,7 +107,7 @@ const Experience = () => {
           Achievements & Experience
         </motion.h2>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={animationState}
@@ -118,9 +121,7 @@ const Experience = () => {
             >
               <div className="relative glass-effect rounded-2xl p-5 sm:p-6 md:p-8 border border-solarized-base01 hover:border-solarized-blue transition-all duration-500 hover:scale-[1.02]">
                 {/* Gradient glow */}
-                <div
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-                ></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
 
                 <div className="relative z-10 flex items-start gap-4 sm:gap-6">
                   {/* Icon */}
@@ -131,31 +132,33 @@ const Experience = () => {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
-                      <h3 className={`text-lg sm:text-xl font-bold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 pr-2`}>
+                      <h3
+                        className={`text-lg sm:text-xl font-bold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 pr-2`}
+                      >
                         {exp.title}
                       </h3>
                       <span className="px-3 sm:px-4 py-1.5 sm:py-2 glass-effect rounded-full text-xs sm:text-sm font-semibold text-white border border-solarized-blue/30 whitespace-nowrap self-start">
                         {exp.year}
                       </span>
                     </div>
-                    <p className="text-solarized-base0 text-sm sm:text-base leading-relaxed">{exp.team}</p>
+                    <p className="text-solarized-base0 text-sm sm:text-base leading-relaxed">
+                      {exp.team}
+                    </p>
                   </div>
                 </div>
 
                 {/* Decorative element */}
-                <div
-                  className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-tl from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-30 rounded-full blur-2xl transition-all duration-500"
-                ></div>
+                <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-tl from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-30 rounded-full blur-2xl transition-all duration-500"></div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: 20 }
               : animationState === "static"
@@ -170,10 +173,10 @@ const Experience = () => {
               <h3 className="text-center text-2xl sm:text-3xl font-bold mb-10 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent relative z-10">
                 Competitive Programming Stats
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                 {/* Stat 1 */}
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center relative group/stat"
                 >
@@ -182,13 +185,17 @@ const Experience = () => {
                     <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-solarized-cyan to-solarized-blue bg-clip-text text-transparent leading-tight">
                       650+
                     </div>
-                    <div className="text-solarized-base0 text-sm sm:text-base font-medium mb-1">Problems Solved</div>
-                    <div className="text-solarized-cyan text-xs sm:text-sm font-semibold">Codeforces</div>
+                    <div className="text-solarized-base0 text-sm sm:text-base font-medium mb-1">
+                      Problems Solved
+                    </div>
+                    <div className="text-solarized-cyan text-xs sm:text-sm font-semibold">
+                      Codeforces
+                    </div>
                   </div>
                 </motion.div>
 
                 {/* Stat 2 */}
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center relative group/stat"
                 >
@@ -197,13 +204,17 @@ const Experience = () => {
                     <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-solarized-violet to-solarized-magenta bg-clip-text text-transparent leading-tight">
                       1200+
                     </div>
-                    <div className="text-solarized-base0 text-sm sm:text-base font-medium mb-1">Total Problems</div>
-                    <div className="text-solarized-violet text-xs sm:text-sm font-semibold">All Platforms</div>
+                    <div className="text-solarized-base0 text-sm sm:text-base font-medium mb-1">
+                      Total Problems
+                    </div>
+                    <div className="text-solarized-violet text-xs sm:text-sm font-semibold">
+                      All Platforms
+                    </div>
                   </div>
                 </motion.div>
 
                 {/* Stat 3 */}
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center relative group/stat"
                 >
@@ -212,8 +223,12 @@ const Experience = () => {
                     <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-solarized-green to-solarized-cyan bg-clip-text text-transparent leading-tight">
                       100+
                     </div>
-                    <div className="text-solarized-base0 text-sm sm:text-base font-medium mb-1">Contests</div>
-                    <div className="text-solarized-green text-xs sm:text-sm font-semibold">Participated</div>
+                    <div className="text-solarized-base0 text-sm sm:text-base font-medium mb-1">
+                      Contests
+                    </div>
+                    <div className="text-solarized-green text-xs sm:text-sm font-semibold">
+                      Participated
+                    </div>
                   </div>
                 </motion.div>
               </div>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Github, Linkedin, Facebook, Mail, Download } from "lucide-react";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
 const Hero = ({ scrollToSection }) => {
   const [text, setText] = useState("");
@@ -8,9 +9,8 @@ const Hero = ({ scrollToSection }) => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const roles = ["Competitive Programmer", "Software Developer"];
-
   useEffect(() => {
+    const roles = ["Competitive Programmer", "Backend Developer"];
     const handleTyping = () => {
       const currentIndex = loopNum % roles.length;
       const fullText = roles[currentIndex];
@@ -33,7 +33,7 @@ const Hero = ({ scrollToSection }) => {
 
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum]);
+  }, [text, isDeleting, loopNum, typingSpeed]);
 
   return (
     <section
@@ -48,52 +48,15 @@ const Hero = ({ scrollToSection }) => {
       </div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Right Half - Professional Portrait Image (First on mobile) */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex items-center justify-center lg:justify-end lg:order-2"
-          >
-            <div className="relative group">
-              {/* Animated gradient border container */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
-              
-              {/* Image container with glass effect */}
-              <div className="relative">
-                <div className="relative overflow-hidden rounded-3xl border-4 border-solarized-cyan/30 shadow-2xl backdrop-blur-sm bg-gradient-to-br from-solarized-blue/10 to-solarized-violet/10 p-2">
-                  {/* Inner glow effect */}
-                  <div className="absolute inset-0 rounded-3xl shadow-inner shadow-solarized-cyan/20"></div>
-                  
-                  {/* Portrait image */}
-                  <img
-                    src="/Image/opu.png"
-                    alt="Atik Shahria Opu"
-                    className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105"
-                  />
-                  
-                  {/* Overlay gradient on hover */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-solarized-blue/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-                
-                {/* Decorative corner accents */}
-                <div className="absolute -top-3 -left-3 w-6 h-6 border-t-4 border-l-4 border-solarized-cyan rounded-tl-lg"></div>
-                <div className="absolute -top-3 -right-3 w-6 h-6 border-t-4 border-r-4 border-solarized-violet rounded-tr-lg"></div>
-                <div className="absolute -bottom-3 -left-3 w-6 h-6 border-b-4 border-l-4 border-solarized-violet rounded-bl-lg"></div>
-                <div className="absolute -bottom-3 -right-3 w-6 h-6 border-b-4 border-r-4 border-solarized-cyan rounded-br-lg"></div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Left Half - Content (Second on mobile) */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+        <div className="flex items-center justify-center">
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-4 sm:space-y-6 text-center lg:text-left lg:order-1"
+            className="space-y-4 sm:space-y-6 text-center"
           >
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -102,19 +65,19 @@ const Hero = ({ scrollToSection }) => {
               Hi There! <span className="inline-block animate-wave">👋</span>
             </motion.h1>
 
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight px-2 lg:px-0"
             >
-              I'm{" "}
+              I&apos;m{" "}
               <span className="bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent">
                 ATIK SHAHRIA OPU
               </span>
             </motion.h2>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -125,7 +88,7 @@ const Hero = ({ scrollToSection }) => {
             </motion.div>
 
             {/* Social Icons */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -164,7 +127,7 @@ const Hero = ({ scrollToSection }) => {
             </motion.div>
 
             {/* Buttons */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0 }}
@@ -189,6 +152,10 @@ const Hero = ({ scrollToSection }) => {
       </div>
     </section>
   );
+};
+
+Hero.propTypes = {
+  scrollToSection: PropTypes.func.isRequired,
 };
 
 export default Hero;

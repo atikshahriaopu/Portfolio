@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
@@ -51,14 +51,14 @@ const App = () => {
     <div className="min-h-screen bg-solarized-base03 text-solarized-base1 font-sans relative overflow-hidden">
       {/* Grid Background */}
       <div className="fixed inset-0 pointer-events-none">
-        <div 
+        <div
           className="absolute inset-0 opacity-15"
           style={{
             backgroundImage: `
               linear-gradient(rgba(38, 139, 210, 0.08) 1px, transparent 1px),
               linear-gradient(90deg, rgba(38, 139, 210, 0.08) 1px, transparent 1px)
             `,
-            backgroundSize: '50px 50px',
+            backgroundSize: "50px 50px",
           }}
         ></div>
       </div>
@@ -66,9 +66,18 @@ const App = () => {
       {/* Animated gradient orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-solarized-blue/15 rounded-full blur-[150px] animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] bg-solarized-cyan/12 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-1/4 left-1/3 w-[650px] h-[650px] bg-solarized-violet/12 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-2/3 right-1/3 w-[500px] h-[500px] bg-solarized-blue/8 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '3s' }}></div>
+        <div
+          className="absolute top-1/3 right-1/4 w-[700px] h-[700px] bg-solarized-cyan/12 rounded-full blur-[150px] animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-1/4 left-1/3 w-[650px] h-[650px] bg-solarized-violet/12 rounded-full blur-[150px] animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-2/3 right-1/3 w-[500px] h-[500px] bg-solarized-blue/8 rounded-full blur-[150px] animate-pulse"
+          style={{ animationDelay: "3s" }}
+        ></div>
       </div>
 
       {/* Radial gradient overlay */}

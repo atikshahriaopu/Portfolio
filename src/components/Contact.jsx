@@ -1,5 +1,4 @@
-import React from "react";
-import { Github, Linkedin, Facebook, Mail, Twitter, Send } from "lucide-react";
+import { Github, Linkedin, Facebook, Twitter, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
@@ -80,7 +79,11 @@ const Contact = () => {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-green/5 rounded-full blur-3xl"></div>
@@ -88,11 +91,11 @@ const Contact = () => {
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: -20 }
               : animationState === "static"
@@ -102,14 +105,14 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent"
         >
-          Let's Connect
+          Let&apos;s Connect
         </motion.h2>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: 20 }
               : animationState === "static"
@@ -119,7 +122,7 @@ const Contact = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-base sm:text-lg md:text-xl text-solarized-base0 mb-10 sm:mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed px-2"
         >
-          I'm always open to discussing new projects, creative ideas, or
+          I&apos;m always open to discussing new projects, creative ideas, or
           opportunities to be part of your vision.
         </motion.p>
 
@@ -127,8 +130,8 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={
-            animationState === "visible" 
-              ? { opacity: 1, y: 0 } 
+            animationState === "visible"
+              ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
               ? { opacity: 0, y: 20 }
               : animationState === "static"
@@ -152,7 +155,10 @@ const Contact = () => {
                 className="inline-block mb-3 sm:mb-4"
               >
                 <div className="bg-gradient-to-br from-solarized-blue to-solarized-cyan p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-2xl">
-                  <Send size={32} className="text-solarized-base2 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+                  <Send
+                    size={32}
+                    className="text-solarized-base2 sm:w-10 sm:h-10 md:w-12 md:h-12"
+                  />
                 </div>
               </motion.div>
 
@@ -170,7 +176,7 @@ const Contact = () => {
         </motion.div>
 
         {/* Social Links */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={animationState}
@@ -188,10 +194,15 @@ const Contact = () => {
                 className={`group relative glass-effect p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl transition-all duration-500 hover:scale-110 border border-solarized-base01 hover:border-solarized-blue hover:bg-solarized-blue/20`}
               >
                 {/* Gradient glow on hover */}
-                <div className={`absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+                <div
+                  className={`absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
+                ></div>
 
                 <div className="relative z-10">
-                  <Icon size={24} className="text-solarized-base0 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                  <Icon
+                    size={24}
+                    className="text-solarized-base0 sm:w-7 sm:h-7 md:w-8 md:h-8"
+                  />
                 </div>
 
                 {/* Hover effect */}

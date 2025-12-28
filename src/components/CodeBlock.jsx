@@ -1,5 +1,3 @@
-import React from "react";
-
 const CodeBlock = () => {
   return (
     <div className="bg-solarized-base02/90 rounded-lg p-6 border border-solarized-base01 font-mono text-sm shadow-2xl">
@@ -21,20 +19,26 @@ const CodeBlock = () => {
           {"    "}
           <span className="text-solarized-cyan">string</span>{" "}
           <span className="text-solarized-green">name</span> ={" "}
-          <span className="text-solarized-yellow">"Atik Shahria Opu"</span>;{"\n"}
+          <span className="text-solarized-yellow">
+            &quot;Atik Shahria Opu&quot;
+          </span>
+          ;{"\n"}
           {"    "}
           <span className="text-solarized-cyan">vector</span>
           {"<"}
           <span className="text-solarized-cyan">string</span>
           {">"} <span className="text-solarized-green">skills</span> = {"{\n"}
           {"        "}
-          <span className="text-solarized-yellow">"C++"</span>,{" "}
-          <span className="text-solarized-yellow">"C"</span>,{"\n"}
+          <span className="text-solarized-yellow">&quot;C++&quot;</span>,{" "}
+          <span className="text-solarized-yellow">&quot;C&quot;</span>,{"\n"}
           {"        "}
-          <span className="text-solarized-yellow">"Node.js"</span>,{" "}
-          <span className="text-solarized-yellow">"MongoDB"</span>,{"\n"}
+          <span className="text-solarized-yellow">
+            &quot;Node.js&quot;
+          </span>,{" "}
+          <span className="text-solarized-yellow">&quot;MongoDB&quot;</span>,
+          {"\n"}
           {"        "}
-          <span className="text-solarized-yellow">"JavaScript"</span>
+          <span className="text-solarized-yellow">&quot;JavaScript&quot;</span>
           {"\n"}
           {"    "}
           {"};"}
