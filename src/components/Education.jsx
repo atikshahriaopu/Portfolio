@@ -1,6 +1,46 @@
 import { BookOpen, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import { styles } from "../styles";
+
+const fadeIn = (direction, type, delay, duration) => {
+  return {
+    hidden: {
+      x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
+      y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
+      opacity: 0,
+    },
+    show: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: type,
+        delay: delay,
+        duration: duration,
+        ease: "easeOut",
+      },
+    },
+  };
+};
+
+const textVariant = (delay) => {
+  return {
+    hidden: {
+      y: -50,
+      opacity: 0,
+    },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        duration: 1.25,
+        delay: delay,
+      },
+    },
+  };
+};
 
 const Education = () => {
   const { animationState, sectionRef } = useScrollAnimation();
@@ -24,37 +64,29 @@ const Education = () => {
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-cyan-500/3 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={
-            animationState === "visible"
-              ? { opacity: 1, y: 0 }
-              : animationState === "fadeOut"
-              ? { opacity: 0, y: -20 }
-              : animationState === "static"
-              ? { opacity: 1, y: 0 }
-              : {}
-          }
-          transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
-        >
-          Education
-        </motion.h2>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div variants={textVariant()}>
+          <h2 className={`${styles.sectionHeadText}`}>Education.</h2>
+        </motion.div>
+
+        <div className="w-full flex">
+          <motion.p
+            variants={fadeIn("", "", 0.1, 1)}
+            className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+          >
+            My academic background in Computer Science & Engineering has
+            provided me with a strong foundation in software development,
+            algorithms, and problem-solving. Here&apos;s my educational journey
+            and key coursework that shaped my technical skills.
+          </motion.p>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={
-            animationState === "visible"
-              ? { opacity: 1, y: 0 }
-              : animationState === "fadeOut"
-              ? { opacity: 0, y: 20 }
-              : animationState === "static"
-              ? { opacity: 1, y: 0 }
-              : {}
-          }
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="group relative"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={fadeIn("up", "spring", 0.5, 0.75)}
+          className="mt-20 group relative"
         >
           <div className="glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:scale-[1.02]">
             {/* Gradient glow */}

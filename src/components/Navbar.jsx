@@ -9,9 +9,9 @@ const Navbar = ({
 }) => {
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl bg-black/30 backdrop-blur-md z-50 border border-white/10 rounded-full shadow-lg">
-      <div className="px-6 sm:px-8">
+      <div className="px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center h-14">
-          <div className="text-2xl font-bold text-solarized-base2 hover:text-solarized-cyan transition-colors duration-300 cursor-pointer">
+          <div className="text-base sm:text-xl md:text-2xl font-bold text-solarized-base2 hover:text-solarized-cyan transition-colors duration-300 cursor-pointer truncate max-w-[180px] sm:max-w-none">
             Atik Shahriar Opu
           </div>
 

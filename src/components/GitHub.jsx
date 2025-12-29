@@ -338,55 +338,55 @@ const GitHub = () => {
                   : {}
               }
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-2 gap-3 sm:gap-4 max-w-2xl mx-auto"
+              className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 max-w-2xl mx-auto"
             >
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 md:p-6 hover:border-solarized-cyan/40 hover:scale-105 transition-all duration-300">
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-cyan/40 hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-blue/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-cyan" />
-                  <p className="text-solarized-base01 text-xs sm:text-sm">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-cyan" />
+                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
                     Followers
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
                     {userData?.followers || 0}
                   </p>
                 </div>
               </div>
 
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 md:p-6 hover:border-solarized-green/40 hover:scale-105 transition-all duration-300">
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-green/40 hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-green/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-green" />
-                  <p className="text-solarized-base01 text-xs sm:text-sm">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-green" />
+                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
                     Following
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
                     {userData?.following || 0}
                   </p>
                 </div>
               </div>
 
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 md:p-6 hover:border-solarized-violet/40 hover:scale-105 transition-all duration-300">
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-violet/40 hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-violet/10 to-solarized-magenta/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
-                  <GitFork className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-violet" />
-                  <p className="text-solarized-base01 text-xs sm:text-sm">
+                  <GitFork className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-violet" />
+                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
                     Public Repos
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
                     {publicRepos}
                   </p>
                 </div>
               </div>
 
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 md:p-6 hover:border-solarized-orange/40 hover:scale-105 transition-all duration-300">
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-orange/40 hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-orange/10 to-solarized-red/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
-                  <Github className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-orange" />
-                  <p className="text-solarized-base01 text-xs sm:text-sm">
+                  <Github className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-orange" />
+                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
                     Total Repos
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-solarized-base2">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
                     {repoCount}
                   </p>
                 </div>
@@ -455,13 +455,16 @@ const GitHub = () => {
                     </div>
 
                     {/* Contribution Grid */}
-                    <div className="flex gap-1 w-full justify-between">
+                    <div className="flex gap-0.5 sm:gap-1 w-full justify-between">
                       {contributionData.current.weeks.map((week, weekIndex) => (
-                        <div key={weekIndex} className="flex flex-col gap-1">
+                        <div
+                          key={weekIndex}
+                          className="flex flex-col gap-0.5 sm:gap-1"
+                        >
                           {week.contributionDays.map((day) => (
                             <div
                               key={day.date}
-                              className={`w-[10px] h-[10px] rounded-[1px] ${getContributionColor(
+                              className={`w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] rounded-[1px] ${getContributionColor(
                                 day.contributionLevel
                               )} hover:ring-1 hover:ring-solarized-cyan/50 transition-all cursor-pointer group relative`}
                               title={`${

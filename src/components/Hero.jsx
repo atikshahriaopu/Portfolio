@@ -39,23 +39,23 @@ const Hero = () => {
   return (
     <section id="home" className={`relative w-full h-screen mx-auto`}>
       <div
-        className={`absolute inset-0 top-[120px] max-w-full mx-auto ${styles.paddingX} flex flex-col`}
+        className={`absolute inset-0 top-[100px] sm:top-[120px] max-w-full mx-auto ${styles.paddingX} flex flex-col`}
       >
         {/* Top: Text content */}
-        <div className="flex flex-row items-start gap-5 z-10">
-          <div className="flex flex-col justify-center items-center mt-5">
-            <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
-            <div className="w-1 sm:h-20 h-16 violet-gradient" />
+        <div className="flex flex-row items-start gap-3 sm:gap-5 z-10">
+          <div className="flex flex-col justify-center items-center mt-3 sm:mt-5">
+            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#915EFF]" />
+            <div className="w-1 h-12 sm:h-16 violet-gradient" />
           </div>
 
           <div>
-            <h1 className="font-black text-white lg:text-[70px] sm:text-[50px] xs:text-[40px] text-[30px] lg:leading-[88px] mt-2">
+            <h1 className="font-black text-white text-[28px] xs:text-[36px] sm:text-[50px] lg:text-[70px] leading-[36px] xs:leading-[44px] sm:leading-[60px] lg:leading-[88px] mt-2">
               Hi, I&apos;m{" "}
               <span className="bg-gradient-to-r from-solarized-violet via-solarized-blue to-solarized-cyan bg-clip-text text-transparent">
                 Atik Shahria Opu
               </span>
             </h1>
-            <p className="text-solarized-base1 font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] mt-2">
+            <p className="text-solarized-base1 font-medium text-[15px] xs:text-[18px] sm:text-[26px] lg:text-[30px] leading-[24px] xs:leading-[28px] sm:leading-[36px] lg:leading-[40px] mt-2">
               {text}
               <span className="animate-pulse text-solarized-cyan">|</span>
             </p>
@@ -63,26 +63,26 @@ const Hero = () => {
         </div>
 
         {/* Center: 3D Computer - taking more space */}
-        <div className="flex-1 w-full mt-2 flex items-center justify-center">
-          <div className="w-full h-full max-h-[800px]">
+        <div className="flex-1 w-full mt-4 sm:mt-2 flex items-center justify-center">
+          <div className="w-full h-full max-h-[400px] sm:max-h-[600px] lg:max-h-[800px]">
             <ComputersCanvas />
           </div>
         </div>
       </div>
 
-      <div className="absolute xs:-bottom-5 -bottom-8 w-full flex justify-center items-center">
+      <div className="absolute bottom-2 xs:-bottom-5 sm:-bottom-8 w-full flex justify-center items-center">
         <a href="#about">
-          <div className="w-[30px] h-[56px] rounded-3xl border-4 border-solarized-cyan flex justify-center items-start p-2">
+          <div className="w-[28px] h-[50px] sm:w-[30px] sm:h-[56px] rounded-3xl border-3 sm:border-4 border-solarized-cyan flex justify-center items-start p-2">
             <motion.div
               animate={{
-                y: [0, 24, 0],
+                y: [0, 20, 0],
               }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
                 repeatType: "loop",
               }}
-              className="w-3 h-3 rounded-full bg-solarized-cyan mb-1"
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-solarized-cyan mb-1"
             />
           </div>
         </a>

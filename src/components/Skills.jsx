@@ -1,9 +1,49 @@
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useEffect, useRef, useState } from "react";
+import { styles } from "../styles";
+
+const fadeIn = (direction, type, delay, duration) => {
+  return {
+    hidden: {
+      x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
+      y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
+      opacity: 0,
+    },
+    show: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: type,
+        delay: delay,
+        duration: duration,
+        ease: "easeOut",
+      },
+    },
+  };
+};
+
+const textVariant = (delay) => {
+  return {
+    hidden: {
+      y: -50,
+      opacity: 0,
+    },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        duration: 1.25,
+        delay: delay,
+      },
+    },
+  };
+};
 
 const Skills = () => {
-  const { animationState, sectionRef } = useScrollAnimation();
+  const { sectionRef } = useScrollAnimation();
   const [isDragging, setIsDragging] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const x = useMotionValue(0);
@@ -63,7 +103,7 @@ const Skills = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const itemWidth = 160; // item width (128px) + gap (32px)
+    const itemWidth = 112; // Adjusted for mobile: smaller item width (80px) + gap (32px)
     const singleSetWidth = allSkills.length * itemWidth;
 
     const startAutoScroll = () => {
@@ -110,7 +150,7 @@ const Skills = () => {
   const handleDragEnd = () => {
     setIsDragging(false);
     // Normalize position after dragging to ensure seamless loop
-    const itemWidth = 160;
+    const itemWidth = 112; // Match the itemWidth from useEffect
     const singleSetWidth = allSkills.length * itemWidth;
     const currentX = x.get();
 
@@ -124,28 +164,34 @@ const Skills = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="pt-40 sm:pt-48 md:pt-56 pb-12 sm:pb-18 relative overflow-hidden"
+      className="pt-32 sm:pt-40 md:pt-48 lg:pt-56 pb-10 sm:pb-12 md:pb-18 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={
-            animationState === "visible"
-              ? { opacity: 1, y: 0 }
-              : animationState === "fadeOut"
-              ? { opacity: 0, y: -20 }
-              : animationState === "static"
-              ? { opacity: 1, y: 0 }
-              : {}
-          }
-          transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
-        >
-          Skills & Technologies
-        </motion.h2>
+        <motion.div variants={textVariant()}>
+          <h2 className={`${styles.sectionHeadText}`}>
+            Skills & Technologies.
+          </h2>
+        </motion.div>
+
+        <div className="w-full flex">
+          <motion.p
+            variants={fadeIn("", "", 0.1, 1)}
+            className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+          >
+            These are the technologies and tools I work with regularly. From
+            programming languages to frameworks and databases, each skill
+            represents hands-on experience in building real-world applications
+            and solving complex problems.
+          </motion.p>
+        </div>
 
         {/* Scrolling Skills Container */}
-        <div className="relative overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          className="relative overflow-hidden mt-20"
+        >
           <motion.div
             ref={containerRef}
             drag="x"
@@ -155,7 +201,7 @@ const Skills = () => {
             onDragEnd={handleDragEnd}
             animate={controls}
             style={{ x }}
-            className="flex gap-8 py-8 cursor-grab active:cursor-grabbing"
+            className="flex gap-4 sm:gap-6 md:gap-8 py-6 sm:py-8 cursor-grab active:cursor-grabbing"
           >
             {duplicatedSkills.map((skill, index) => (
               <motion.div
@@ -164,15 +210,15 @@ const Skills = () => {
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                className="flex-shrink-0 flex flex-col items-center group cursor-pointer w-24 sm:w-32"
+                className="flex-shrink-0 flex flex-col items-center group cursor-pointer w-20 sm:w-24 md:w-32"
               >
                 {/* Image Container */}
-                <div className="relative mb-3">
+                <div className="relative mb-2 sm:mb-3">
                   <div className="transform group-hover:scale-110 transition-all duration-300 filter drop-shadow-lg group-hover:drop-shadow-2xl">
                     <img
                       src={skill.image}
                       alt={skill.name}
-                      className="w-16 h-16 sm:w-20 sm:h-20 object-contain pointer-events-none"
+                      className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain pointer-events-none"
                       draggable="false"
                     />
                   </div>
@@ -181,13 +227,13 @@ const Skills = () => {
                 </div>
 
                 {/* Skill Name */}
-                <p className="text-sm sm:text-base font-medium text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 text-center">
+                <p className="text-xs sm:text-sm md:text-base font-medium text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 text-center">
                   {skill.name}
                 </p>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

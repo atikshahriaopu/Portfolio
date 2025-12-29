@@ -143,7 +143,7 @@ const Contact = () => {
         >
           <a
             href="mailto:atikshariaropu@gmail.com"
-            className="group inline-block glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:scale-105 relative overflow-hidden"
+            className="group inline-block glass-effect rounded-xl sm:rounded-2xl md:rounded-3xl p-5 sm:p-6 md:p-8 lg:p-10 border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:scale-105 relative overflow-hidden"
           >
             {/* Gradient glow */}
             <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
@@ -152,20 +152,20 @@ const Contact = () => {
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.3 }}
-                className="inline-block mb-3 sm:mb-4"
+                className="inline-block mb-2 sm:mb-3 md:mb-4"
               >
-                <div className="bg-gradient-to-br from-solarized-blue to-solarized-cyan p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-2xl">
+                <div className="bg-gradient-to-br from-solarized-blue to-solarized-cyan p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-2xl">
                   <Send
-                    size={32}
-                    className="text-solarized-base2 sm:w-10 sm:h-10 md:w-12 md:h-12"
+                    size={24}
+                    className="text-solarized-base2 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10"
                   />
                 </div>
               </motion.div>
 
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-solarized-base2">
+              <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2 md:mb-3 text-solarized-base2">
                 Email Me
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-solarized-cyan break-all">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-solarized-cyan break-all px-2">
                 atikshahriaopu@gmail.com
               </p>
             </div>
@@ -191,22 +191,22 @@ const Contact = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative glass-effect p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl transition-all duration-500 hover:scale-110 border border-white/10 hover:border-blue-400/50 hover:bg-blue-500/10`}
+                className={`group relative glass-effect p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg sm:rounded-xl md:rounded-2xl transition-all duration-500 hover:scale-110 border border-white/10 hover:border-blue-400/50 hover:bg-blue-500/10`}
               >
                 {/* Gradient glow on hover */}
                 <div
-                  className={`absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  className={`absolute inset-0 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 ></div>
 
                 <div className="relative z-10">
                   <Icon
-                    size={24}
-                    className="text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 sm:w-7 sm:h-7 md:w-8 md:h-8"
+                    size={20}
+                    className="text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 sm:w-6 sm:h-6 md:w-7 md:h-7"
                   />
                 </div>
 
                 {/* Hover effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500 rounded-xl sm:rounded-2xl"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500 rounded-lg sm:rounded-xl md:rounded-2xl"></div>
               </motion.a>
             );
           })}
