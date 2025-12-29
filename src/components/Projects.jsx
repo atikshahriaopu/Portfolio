@@ -1,6 +1,7 @@
+import { useState } from "react";
 import Tilt from "react-tilt";
 import { motion } from "framer-motion";
-import { ExternalLink, Code } from "lucide-react";
+import { ExternalLink, Code, Eye, X } from "lucide-react";
 import { styles } from "../styles";
 import PropTypes from "prop-types";
 
@@ -73,14 +74,119 @@ const projects = [
   },
 ];
 
+const ProjectModal = ({ project, onClose }) => {
+  if (!project) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl shadow-violet-500/20"
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
+        >
+          <X size={24} className="text-white" />
+        </button>
+
+        {/* Image */}
+        <div className="relative w-full h-64 sm:h-80 overflow-hidden rounded-t-3xl">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="p-6 sm:p-8">
+          {/* Title */}
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            {project.title}
+          </h2>
+
+          {/* Tech Stack */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tech.map((techItem, i) => (
+              <span
+                key={`modal-${project.title}-${techItem}-${i}`}
+                className="px-3 py-1 text-sm rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30"
+              >
+                {techItem}
+              </span>
+            ))}
+          </div>
+
+          {/* Description */}
+          <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+            {project.description}
+          </p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mb-8">
+            {project.tech.map((techItem, i) => (
+              <p
+                key={`tag-${project.title}-${techItem}-${i}`}
+                className="text-sm text-violet-400"
+              >
+                #{techItem}
+              </p>
+            ))}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-wrap gap-3 sm:gap-4">
+            {project.projectLink !== "#" && (
+              <button
+                onClick={() => window.open(project.projectLink, "_blank")}
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50"
+              >
+                <ExternalLink size={18} />
+                Live Demo
+              </button>
+            )}
+            <button
+              onClick={() => window.open(project.githubLink, "_blank")}
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50"
+            >
+              <Code size={18} />
+              Code
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+ProjectModal.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+    projectLink: PropTypes.string.isRequired,
+    githubLink: PropTypes.string.isRequired,
+  }),
+  onClose: PropTypes.func.isRequired,
+};
+
 const ProjectCard = ({
   index,
   title,
-  description,
   image,
   tech,
   projectLink,
   githubLink,
+  onViewDetails,
 }) => {
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
@@ -93,62 +199,83 @@ const ProjectCard = ({
           easing: "cubic-bezier(.03,.98,.52,.99)",
           perspective: 1000,
         }}
-        className="bg-tertiary p-4 sm:p-5 rounded-2xl w-full sm:w-[360px] group transition-shadow duration-200 shadow-lg shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/30 will-change-transform transform-gpu"
+        className="bg-tertiary p-4 sm:p-5 rounded-2xl w-full sm:w-[360px] h-[520px] sm:h-[560px] flex flex-col group transition-shadow duration-200 shadow-lg shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/30 will-change-transform transform-gpu"
       >
-        <div className="relative w-full h-[180px] sm:h-[230px] overflow-hidden rounded-2xl">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover rounded-2xl transition-transform duration-200 ease-out sm:group-hover:scale-110 will-change-transform transform-gpu"
-          />
+        <div
+          className="flex flex-col h-full cursor-pointer"
+          onClick={onViewDetails}
+        >
+          <div className="relative w-full h-[180px] sm:h-[230px] overflow-hidden rounded-2xl">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover rounded-2xl transition-transform duration-200 ease-out sm:group-hover:scale-110 will-change-transform transform-gpu"
+            />
 
-          <div className="absolute inset-0 flex justify-end m-2 sm:m-3 card-img_hover">
-            <div
-              onClick={() => window.open(githubLink, "_blank")}
-              className="black-gradient w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer transition-[transform,opacity] duration-150 ease-out sm:hover:scale-110 opacity-100 sm:opacity-0 sm:hover:opacity-100 sm:group-hover:opacity-100 will-change-[transform,opacity] transform-gpu"
-            >
-              <Code size={18} className="text-white sm:w-5 sm:h-5" />
+            <div className="absolute inset-0 flex justify-end m-2 sm:m-3 card-img_hover">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(githubLink, "_blank");
+                }}
+                className="black-gradient w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer transition-[transform,opacity] duration-150 ease-out sm:hover:scale-110 opacity-100 sm:opacity-0 sm:hover:opacity-100 sm:group-hover:opacity-100 will-change-[transform,opacity] transform-gpu"
+              >
+                <Code size={18} className="text-white sm:w-5 sm:h-5" />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-4 sm:mt-5">
-          <h3 className="text-white font-bold text-[20px] sm:text-[24px]">
-            {title}
-          </h3>
-          <p className="mt-2 text-secondary text-[13px] sm:text-[14px] leading-relaxed">
-            {description}
-          </p>
-        </div>
+          <div className="mt-4 sm:mt-5 flex-1 flex flex-col">
+            <h3 className="text-white font-bold text-[20px] sm:text-[24px]">
+              {title}
+            </h3>
+          </div>
 
-        <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
-          {tech.map((techItem, i) => (
-            <p
-              key={`${title}-${techItem}-${i}`}
-              className="text-[12px] sm:text-[14px] text-blue-400"
-            >
-              #{techItem}
-            </p>
-          ))}
-        </div>
+          <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
+            {tech.map((techItem, i) => (
+              <p
+                key={`${title}-${techItem}-${i}`}
+                className="text-[12px] sm:text-[14px] text-blue-400"
+              >
+                #{techItem}
+              </p>
+            ))}
+          </div>
 
-        <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 sm:gap-3">
-          {projectLink !== "#" && (
+          <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 sm:gap-3">
             <button
-              onClick={() => window.open(projectLink, "_blank")}
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-violet-600 text-white font-medium text-xs sm:text-sm transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-violet-500/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
+              onClick={(e) => {
+                e.stopPropagation();
+                onViewDetails();
+              }}
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
             >
-              <ExternalLink size={14} className="sm:w-4 sm:h-4" />
-              Live Demo
+              <Eye size={14} className="sm:w-4 sm:h-4" />
+              View Details
             </button>
-          )}
-          <button
-            onClick={() => window.open(githubLink, "_blank")}
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-medium text-xs sm:text-sm transition-[transform,background-color,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-gray-700/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
-          >
-            <Code size={14} className="sm:w-4 sm:h-4" />
-            Code
-          </button>
+            {projectLink !== "#" && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(projectLink, "_blank");
+                }}
+                className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
+              >
+                <ExternalLink size={14} className="sm:w-4 sm:h-4" />
+                Live Demo
+              </button>
+            )}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(githubLink, "_blank");
+              }}
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm transition-[transform,background-color,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
+            >
+              <Code size={14} className="sm:w-4 sm:h-4" />
+              Code
+            </button>
+          </div>
         </div>
       </Tilt>
     </motion.div>
@@ -156,6 +283,8 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   return (
     <section id="projects" className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
@@ -183,9 +312,22 @@ const Projects = () => {
           className="mt-12 sm:mt-20 flex flex-wrap gap-5 sm:gap-7 justify-center"
         >
           {projects.map((project, index) => (
-            <ProjectCard key={`project-${index}`} index={index} {...project} />
+            <ProjectCard
+              key={`project-${index}`}
+              index={index}
+              {...project}
+              onViewDetails={() => setSelectedProject(project)}
+            />
           ))}
         </motion.div>
+
+        {/* Modal */}
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
       </div>
     </section>
   );
@@ -199,6 +341,7 @@ ProjectCard.propTypes = {
   tech: PropTypes.arrayOf(PropTypes.string).isRequired,
   projectLink: PropTypes.string.isRequired,
   githubLink: PropTypes.string.isRequired,
+  onViewDetails: PropTypes.func.isRequired,
 };
 
 export default Projects;

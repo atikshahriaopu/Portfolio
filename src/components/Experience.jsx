@@ -154,7 +154,7 @@ const Experience = () => {
 
                 <div className="relative z-10 flex items-start gap-4 sm:gap-6">
                   {/* Icon */}
-                  <div className="flex-shrink-0 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                  <div className="flex-shrink-0 transform group-hover:scale-110 transition-all duration-500">
                     {exp.icon.startsWith("/") ? (
                       <img
                         src={exp.icon}

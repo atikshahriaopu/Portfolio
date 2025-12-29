@@ -344,7 +344,7 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-blue/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-cyan" />
-                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
+                  <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
                     Followers
                   </p>
                   <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
@@ -357,7 +357,7 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-green/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-green" />
-                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
+                  <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
                     Following
                   </p>
                   <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
@@ -370,7 +370,7 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-violet/10 to-solarized-magenta/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <GitFork className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-violet" />
-                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
+                  <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
                     Public Repos
                   </p>
                   <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">
@@ -383,7 +383,7 @@ const GitHub = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-orange/10 to-solarized-red/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Github className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-orange" />
-                  <p className="text-solarized-base01 text-[10px] sm:text-xs md:text-sm">
+                  <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
                     Total Repos
                   </p>
                   <p className="text-xl sm:text-2xl md:text-3xl font-bold text-solarized-base2">

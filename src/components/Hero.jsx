@@ -44,7 +44,7 @@ const Hero = () => {
         {/* Top: Text content */}
         <div className="flex flex-row items-start gap-3 sm:gap-5 z-10">
           <div className="flex flex-col justify-center items-center mt-3 sm:mt-5">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#915EFF]" />
+            {/* <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#915EFF]" /> */}
             <div className="w-1 h-12 sm:h-16 violet-gradient" />
           </div>
 

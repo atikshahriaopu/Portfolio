@@ -65,7 +65,7 @@ const App = () => {
       className="min-h-screen text-solarized-base1 font-sans relative overflow-hidden"
       style={{
         backgroundColor: "#060817",
-        backgroundImage: "url(/Image/bg.png)",
+        backgroundImage: "url(#)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",

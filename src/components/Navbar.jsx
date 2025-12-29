@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import PropTypes from "prop-types";
 
 const Navbar = ({
@@ -16,7 +16,7 @@ const Navbar = ({
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {[
               "Home",
               "Skills",
@@ -42,6 +42,14 @@ const Navbar = ({
                 </button>
               );
             })}
+            <a
+              href="/CV/Atik_Shahria_Opu.pdf"
+              download="Atik_Shahria_Opu_Resume.pdf"
+              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-solarized-violet to-solarized-cyan text-white font-medium text-sm rounded-full hover:shadow-lg hover:shadow-solarized-cyan/50 transition-all duration-300 transform hover:scale-105"
+            >
+              <Download size={16} />
+              Resume
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,6 +96,14 @@ const Navbar = ({
                 </button>
               );
             })}
+            <a
+              href="/CV/Atik_Shahria_Opu.pdf"
+              download="Atik_Shahria_Opu_Resume.pdf"
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-solarized-violet to-solarized-cyan text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 mt-2"
+            >
+              <Download size={18} />
+              Download Resume
+            </a>
           </div>
         </div>
       )}
