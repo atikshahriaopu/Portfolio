@@ -13,6 +13,12 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Scroll to top on page load/refresh
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    window.history.scrollRestoration = "manual";
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
@@ -48,7 +54,7 @@ const App = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: "auto", // Changed from "smooth" to "auto" for instant scrolling
       });
       setIsMenuOpen(false);
     }

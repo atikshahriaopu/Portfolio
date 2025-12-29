@@ -1,8 +1,15 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import { useEffect, useRef, useState } from "react";
 
 const Skills = () => {
   const { animationState, sectionRef } = useScrollAnimation();
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const x = useMotionValue(0);
+  const controls = useAnimation();
+  const containerRef = useRef(null);
+  const animationRef = useRef(null);
 
   const techSkills = [
     { name: "C", image: "/Image/c.png" },
@@ -38,61 +45,88 @@ const Skills = () => {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-    fadeOut: {
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-      },
-    },
-    static: {
-      opacity: 1,
-    },
+  // Combine tech and domain skills
+  const allSkills = [...techSkills, ...domainSkills];
+
+  // Create a circular array with enough copies for infinite seamless loop
+  const duplicatedSkills = [
+    ...allSkills,
+    ...allSkills,
+    ...allSkills,
+    ...allSkills,
+    ...allSkills,
+    ...allSkills,
+    ...allSkills,
+    ...allSkills,
+  ];
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const itemWidth = 160; // item width (128px) + gap (32px)
+    const singleSetWidth = allSkills.length * itemWidth;
+
+    const startAutoScroll = () => {
+      const currentX = x.get();
+
+      // Animate one full set of skills
+      animationRef.current = controls
+        .start({
+          x: currentX - singleSetWidth,
+          transition: {
+            duration: allSkills.length * 2.5, // Smooth consistent speed
+            ease: "linear",
+          },
+        })
+        .then(() => {
+          // Seamlessly loop by resetting position to middle copies
+          const newX = x.get() % -singleSetWidth;
+          const middleOffset = -singleSetWidth * 3;
+          x.set(newX + middleOffset);
+          if (!isDragging && !isHovering) {
+            startAutoScroll();
+          }
+        });
+    };
+
+    if (!isDragging && !isHovering) {
+      startAutoScroll();
+    } else {
+      controls.stop();
+    }
+
+    return () => {
+      if (animationRef.current) {
+        controls.stop();
+      }
+    };
+  }, [isDragging, isHovering, controls, allSkills.length, x]);
+
+  const handleDragStart = () => {
+    setIsDragging(true);
+    controls.stop();
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-    fadeOut: {
-      opacity: 0,
-      y: 20,
-      transition: {
-        duration: 0.3,
-      },
-    },
-    static: {
-      opacity: 1,
-      y: 0,
-    },
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    // Normalize position after dragging to ensure seamless loop
+    const itemWidth = 160;
+    const singleSetWidth = allSkills.length * itemWidth;
+    const currentX = x.get();
+
+    // Calculate normalized position within the middle sets (never at edges)
+    const normalizedX = currentX % -singleSetWidth;
+    const middleOffset = -singleSetWidth * 3; // Keep in middle copies
+    x.set(normalizedX + middleOffset);
   };
 
   return (
     <section
       ref={sectionRef}
       id="skills"
-      className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+      className="py-16 sm:py-24 relative overflow-hidden"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-blue-500/3 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 sm:w-72 sm:h-72 bg-cyan-500/3 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={
@@ -110,79 +144,50 @@ const Skills = () => {
           Skills & Technologies
         </motion.h2>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={animationState}
-          className="space-y-16 max-w-6xl mx-auto"
-        >
-          {/* Tech Skills Section - 2x5 Grid */}
-          <motion.div variants={itemVariants}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 mb-8">
-              {techSkills.map((skill, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center group cursor-pointer"
-                >
-                  {/* Image Container */}
-                  <div className="relative mb-3">
-                    <div className="transform group-hover:scale-110 transition-all duration-300 filter drop-shadow-lg group-hover:drop-shadow-2xl">
-                      <img
-                        src={skill.image}
-                        alt={skill.name}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
-                      />
-                    </div>
-                    {/* Glow effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-20 blur-xl rounded-full transition-opacity duration-300"></div>
+        {/* Scrolling Skills Container */}
+        <div className="relative overflow-hidden">
+          <motion.div
+            ref={containerRef}
+            drag="x"
+            dragConstraints={false}
+            dragElastic={0}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            animate={controls}
+            style={{ x }}
+            className="flex gap-8 py-8 cursor-grab active:cursor-grabbing"
+          >
+            {duplicatedSkills.map((skill, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.1, y: -5 }}
+                transition={{ duration: 0.3 }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                className="flex-shrink-0 flex flex-col items-center group cursor-pointer w-24 sm:w-32"
+              >
+                {/* Image Container */}
+                <div className="relative mb-3">
+                  <div className="transform group-hover:scale-110 transition-all duration-300 filter drop-shadow-lg group-hover:drop-shadow-2xl">
+                    <img
+                      src={skill.image}
+                      alt={skill.name}
+                      className="w-16 h-16 sm:w-20 sm:h-20 object-contain pointer-events-none"
+                      draggable="false"
+                    />
                   </div>
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-20 blur-xl rounded-full transition-opacity duration-300"></div>
+                </div>
 
-                  {/* Skill Name */}
-                  <p className="text-sm sm:text-base font-medium text-white/80 group-hover:text-cyan-300 transition-colors duration-300 text-center">
-                    {skill.name}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+                {/* Skill Name */}
+                <p className="text-sm sm:text-base font-medium text-white/80 group-hover:text-cyan-300 transition-colors duration-300 text-center">
+                  {skill.name}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
-
-          {/* Domain Skills Section */}
-          <motion.div variants={itemVariants}>
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-cyan-400">
-              Domain
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
-              {domainSkills.map((skill, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center group cursor-pointer"
-                >
-                  {/* Image Container */}
-                  <div className="relative mb-3">
-                    <div className="transform group-hover:scale-110 transition-all duration-300 filter drop-shadow-lg group-hover:drop-shadow-2xl">
-                      <img
-                        src={skill.image}
-                        alt={skill.name}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
-                      />
-                    </div>
-                    {/* Glow effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-20 blur-xl rounded-full transition-opacity duration-300"></div>
-                  </div>
-
-                  {/* Skill Name */}
-                  <p className="text-sm sm:text-base font-medium text-white/80 group-hover:text-cyan-300 transition-colors duration-300 text-center">
-                    {skill.name}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -15,31 +15,28 @@ export const useScrollAnimation = (threshold = 0.1) => {
         const currentScrollY = window.scrollY;
         const scrollingDown = currentScrollY >= lastScrollYRef.current;
         lastScrollYRef.current = currentScrollY;
-        
+
         if (entry.isIntersecting) {
           isInViewRef.current = true;
-          
-          // When scrolling down into view → animate
-          if (scrollingDown) {
+
+          // Only animate if this section has never been animated before
+          if (!hasAnimatedRef.current) {
             setAnimationState("visible");
             hasAnimatedRef.current = true;
           } else {
-            // When scrolling up into view → appear static (no animation)
+            // If already animated, keep it static (no animation)
             setAnimationState("static");
           }
         } else {
-          // When scrolling away from element → fade out
-          if (isInViewRef.current) {
-            setAnimationState("fadeOut");
-            isInViewRef.current = false;
-          }
-          // Reset the animation flag so it can replay next time when scrolling down
-          hasAnimatedRef.current = false;
+          // When scrolling away from element, keep it in its current state
+          // Don't fade out or reset, just mark as not in view
+          isInViewRef.current = false;
+          // Keep hasAnimatedRef.current as true - never reset until page refresh
         }
       },
-      { 
+      {
         threshold,
-        rootMargin: "-50px 0px -50px 0px"
+        rootMargin: "-50px 0px -50px 0px",
       }
     );
 
@@ -51,7 +48,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
-      
+
       rafId = requestAnimationFrame(() => {
         lastScrollYRef.current = window.scrollY;
       });

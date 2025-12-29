@@ -175,17 +175,19 @@ const Projects = () => {
                   {/* Gradient glow */}
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
 
-                  {/* Project Image */}
-                  <div className="relative w-full h-40 sm:h-44 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
+                  {/* Project Image with Frame */}
+                  <div className="p-3">
+                    <div className="relative w-full h-40 sm:h-44 overflow-hidden rounded-lg border-2 border-cyan-400/30 group-hover:border-cyan-400/60 transition-all duration-500 shadow-lg shadow-cyan-400/10 group-hover:shadow-cyan-400/30">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/30 to-transparent group-hover:from-gray-900/80 group-hover:via-transparent transition-all duration-500"></div>
+                    </div>
                   </div>
 
-                  <div className="relative z-10 p-4 sm:p-5 flex flex-col">
+                  <div className="relative z-10 px-4 pb-4 sm:px-5 sm:pb-5 flex flex-col">
                     {/* Title */}
                     <h3 className="text-lg sm:text-xl font-bold mb-4 text-white min-h-[3.5rem]">
                       {project.title}
