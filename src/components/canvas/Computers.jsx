@@ -1,8 +1,9 @@
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import PropTypes from "prop-types";
 
-import CanvasLoader from "../loader.jsx";
+import CanvasLoader from "../Loader.jsx";
 
 const Computers = ({ isMobile }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
@@ -27,6 +28,10 @@ const Computers = ({ isMobile }) => {
       />
     </mesh>
   );
+};
+
+Computers.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const ComputersCanvas = () => {

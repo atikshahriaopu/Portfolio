@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Github, Users, GitFork, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
@@ -18,79 +18,83 @@ const GitHub = () => {
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchGitHubData = async (forceRefresh = false) => {
-    try {
-      setLoading(true);
-      setError(null);
+  const fetchGitHubData = useCallback(
+    async (forceRefresh = false) => {
+      try {
+        setLoading(true);
+        setError(null);
 
-      // Prepare headers with token if available
-      const headers = {};
-      if (GITHUB_TOKEN) {
-        headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
-      }
-
-      // Fetch user data from REST API
-      const userRes = await fetch(`https://api.github.com/users/${username}`, {
-        headers,
-      });
-      if (!userRes.ok) {
-        if (userRes.status === 401 || userRes.status === 403) {
-          throw new Error(
-            "GitHub API rate limit exceeded or authentication required. Please add a GitHub token to your .env file."
-          );
+        // Prepare headers with token if available
+        const headers = {};
+        if (GITHUB_TOKEN) {
+          headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
         }
-        throw new Error(`Failed to fetch user data: ${userRes.status}`);
-      }
-      const userData = await userRes.json();
-      setUserData(userData);
 
-      // Get total repo count
-      const totalRepos =
-        (userData.public_repos || 0) + (userData.total_private_repos || 0);
-      setRepoCount(totalRepos);
-      setPublicRepos(userData.public_repos || 0);
+        // Fetch user data from REST API
+        const userRes = await fetch(
+          `https://api.github.com/users/${username}`,
+          {
+            headers,
+          }
+        );
+        if (!userRes.ok) {
+          if (userRes.status === 401 || userRes.status === 403) {
+            throw new Error(
+              "GitHub API rate limit exceeded or authentication required. Please add a GitHub token to your .env file."
+            );
+          }
+          throw new Error(`Failed to fetch user data: ${userRes.status}`);
+        }
+        const userData = await userRes.json();
+        setUserData(userData);
 
-      // Calculate 12 months range (ending with current month)
-      const now = new Date();
-      const currentYear = now.getFullYear();
-      const currentMonth = now.getMonth(); // 0-11
+        // Get total repo count
+        const totalRepos =
+          (userData.public_repos || 0) + (userData.total_private_repos || 0);
+        setRepoCount(totalRepos);
+        setPublicRepos(userData.public_repos || 0);
 
-      // Calculate start date (12 months ago from current month)
-      const startDate = new Date(currentYear, currentMonth - 11, 1);
-      const endDate = new Date(currentYear, currentMonth + 1, 0); // Last day of current month
+        // Calculate 12 months range (ending with current month)
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth(); // 0-11
 
-      const fromDate = startDate.toISOString().split("T")[0] + "T00:00:00Z";
-      const toDate = endDate.toISOString().split("T")[0] + "T23:59:59Z";
+        // Calculate start date (12 months ago from current month)
+        const startDate = new Date(currentYear, currentMonth - 11, 1);
+        const endDate = new Date(currentYear, currentMonth + 1, 0); // Last day of current month
 
-      // Check cache first
-      const cacheKey = `${CACHE_KEY}_12months_${fromDate}`;
-      const cachedData = localStorage.getItem(cacheKey);
-      if (cachedData && !forceRefresh) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-          console.log(`Using cached GitHub data for 12 months`);
-          setContributionData({ current: data.contributionData });
+        const fromDate = startDate.toISOString().split("T")[0] + "T00:00:00Z";
+        const toDate = endDate.toISOString().split("T")[0] + "T23:59:59Z";
+
+        // Check cache first
+        const cacheKey = `${CACHE_KEY}_12months_${fromDate}`;
+        const cachedData = localStorage.getItem(cacheKey);
+        if (cachedData && !forceRefresh) {
+          const { data, timestamp } = JSON.parse(cachedData);
+          if (Date.now() - timestamp < CACHE_DURATION) {
+            console.log(`Using cached GitHub data for 12 months`);
+            setContributionData({ current: data.contributionData });
+            setLoading(false);
+            return;
+          }
+        }
+
+        // Fetch contribution data using GitHub GraphQL API
+        // Note: GraphQL API requires authentication
+        if (!GITHUB_TOKEN) {
+          // If no token, create a basic contribution data structure
+          setContributionData({
+            current: {
+              totalContributions: 0,
+              weeks: [],
+            },
+          });
           setLoading(false);
           return;
         }
-      }
 
-      // Fetch contribution data using GitHub GraphQL API
-      // Note: GraphQL API requires authentication
-      if (!GITHUB_TOKEN) {
-        // If no token, create a basic contribution data structure
-        setContributionData({
-          current: {
-            totalContributions: 0,
-            weeks: [],
-          },
-        });
-        setLoading(false);
-        return;
-      }
-
-      const graphqlQuery = {
-        query: `
+        const graphqlQuery = {
+          query: `
             query($username: String!, $from: DateTime!, $to: DateTime!) {
               user(login: $username) {
                 contributionsCollection(from: $from, to: $to) {
@@ -108,69 +112,71 @@ const GitHub = () => {
               }
             }
           `,
-        variables: {
-          username,
-          from: fromDate,
-          to: toDate,
-        },
-      };
+          variables: {
+            username,
+            from: fromDate,
+            to: toDate,
+          },
+        };
 
-      const graphqlHeaders = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-      };
+        const graphqlHeaders = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+        };
 
-      const graphqlRes = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: graphqlHeaders,
-        body: JSON.stringify(graphqlQuery),
-      });
+        const graphqlRes = await fetch("https://api.github.com/graphql", {
+          method: "POST",
+          headers: graphqlHeaders,
+          body: JSON.stringify(graphqlQuery),
+        });
 
-      if (!graphqlRes.ok) {
-        throw new Error(`GraphQL API error: ${graphqlRes.status}`);
+        if (!graphqlRes.ok) {
+          throw new Error(`GraphQL API error: ${graphqlRes.status}`);
+        }
+
+        const graphqlData = await graphqlRes.json();
+
+        if (graphqlData.errors) {
+          console.error("GraphQL errors:", graphqlData.errors);
+          throw new Error(
+            graphqlData.errors[0]?.message || "GraphQL query failed"
+          );
+        }
+
+        const contributionCalendar =
+          graphqlData.data?.user?.contributionsCollection?.contributionCalendar;
+
+        if (!contributionCalendar) {
+          throw new Error("No contribution data available");
+        }
+
+        setContributionData({ current: contributionCalendar });
+
+        // Cache the data
+        const cacheData = {
+          data: {
+            userData,
+            repoCount: totalRepos,
+            contributionData: contributionCalendar,
+          },
+          timestamp: Date.now(),
+          dateRange: { fromDate, toDate },
+        };
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching GitHub data:", error);
+        setError(error.message);
+        setLoading(false);
       }
-
-      const graphqlData = await graphqlRes.json();
-
-      if (graphqlData.errors) {
-        console.error("GraphQL errors:", graphqlData.errors);
-        throw new Error(
-          graphqlData.errors[0]?.message || "GraphQL query failed"
-        );
-      }
-
-      const contributionCalendar =
-        graphqlData.data?.user?.contributionsCollection?.contributionCalendar;
-
-      if (!contributionCalendar) {
-        throw new Error("No contribution data available");
-      }
-
-      setContributionData({ current: contributionCalendar });
-
-      // Cache the data
-      const cacheData = {
-        data: {
-          userData,
-          repoCount: totalRepos,
-          contributionData: contributionCalendar,
-        },
-        timestamp: Date.now(),
-        dateRange: { fromDate, toDate },
-      };
-      localStorage.setItem(cacheKey, JSON.stringify(cacheData));
-
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching GitHub data:", error);
-      setError(error.message);
-      setLoading(false);
-    }
-  };
+    },
+    [username, GITHUB_TOKEN, CACHE_KEY, CACHE_DURATION]
+  );
 
   useEffect(() => {
     fetchGitHubData();
-  }, []);
+  }, [fetchGitHubData]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
