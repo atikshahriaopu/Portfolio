@@ -23,20 +23,22 @@ const GitHub = () => {
       setLoading(true);
       setError(null);
 
-      // Check if GitHub token is available
-      if (!GITHUB_TOKEN) {
-        throw new Error(
-          "GitHub token is required. Please add VITE_GITHUB_TOKEN to your .env file"
-        );
+      // Prepare headers with token if available
+      const headers = {};
+      if (GITHUB_TOKEN) {
+        headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
       }
 
       // Fetch user data from REST API
       const userRes = await fetch(`https://api.github.com/users/${username}`, {
-        headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-        },
+        headers,
       });
       if (!userRes.ok) {
+        if (userRes.status === 401 || userRes.status === 403) {
+          throw new Error(
+            "GitHub API rate limit exceeded or authentication required. Please add a GitHub token to your .env file."
+          );
+        }
         throw new Error(`Failed to fetch user data: ${userRes.status}`);
       }
       const userData = await userRes.json();
@@ -74,6 +76,19 @@ const GitHub = () => {
       }
 
       // Fetch contribution data using GitHub GraphQL API
+      // Note: GraphQL API requires authentication
+      if (!GITHUB_TOKEN) {
+        // If no token, create a basic contribution data structure
+        setContributionData({
+          current: {
+            totalContributions: 0,
+            weeks: [],
+          },
+        });
+        setLoading(false);
+        return;
+      }
+
       const graphqlQuery = {
         query: `
             query($username: String!, $from: DateTime!, $to: DateTime!) {
@@ -100,14 +115,14 @@ const GitHub = () => {
         },
       };
 
-      const headers = {
+      const graphqlHeaders = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${GITHUB_TOKEN}`,
       };
 
       const graphqlRes = await fetch("https://api.github.com/graphql", {
         method: "POST",
-        headers,
+        headers: graphqlHeaders,
         body: JSON.stringify(graphqlQuery),
       });
 
@@ -431,71 +446,85 @@ const GitHub = () => {
 
               {/* Calendar Grid with Horizontal Scroll */}
               <div className="calendar__scroll-container overflow-x-auto pb-2 sm:pb-3">
-                {contributionData.current && (
-                  <div className="w-full">
-                    {/* Month Labels */}
-                    <div className="relative h-5 mb-1 w-full">
-                      {getMonthLabels(contributionData.current.weeks).map(
-                        (month, index) => (
-                          <div
-                            key={index}
-                            className="absolute text-[10px] md:text-xs text-solarized-base01 font-medium"
-                            style={{
-                              left: `${
-                                (month.weekIndex /
-                                  contributionData.current.weeks.length) *
-                                100
-                              }%`,
-                            }}
-                          >
-                            {month.name}
-                          </div>
-                        )
-                      )}
-                    </div>
-
-                    {/* Contribution Grid */}
-                    <div className="flex gap-0.5 sm:gap-1 w-full justify-between">
-                      {contributionData.current.weeks.map((week, weekIndex) => (
-                        <div
-                          key={weekIndex}
-                          className="flex flex-col gap-0.5 sm:gap-1"
-                        >
-                          {week.contributionDays.map((day) => (
-                            <div
-                              key={day.date}
-                              className={`w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] rounded-[1px] ${getContributionColor(
-                                day.contributionLevel
-                              )} hover:ring-1 hover:ring-solarized-cyan/50 transition-all cursor-pointer group relative`}
-                              title={`${
-                                day.contributionCount
-                              } contributions on ${new Date(
-                                day.date
-                              ).toLocaleDateString()}`}
-                            >
-                              {/* Tooltip */}
-                              <div className="opacity-0 group-hover:opacity-100 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-solarized-base03 border border-solarized-blue/30 text-solarized-base2 text-xs rounded whitespace-nowrap pointer-events-none z-20 shadow-lg">
-                                <div className="font-semibold">
-                                  {day.contributionCount} contributions
-                                </div>
-                                <div className="text-solarized-base00">
-                                  {new Date(day.date).toLocaleDateString(
-                                    "en-US",
-                                    {
-                                      weekday: "short",
-                                      month: "short",
-                                      day: "numeric",
-                                      year: "numeric",
-                                    }
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
+                {!GITHUB_TOKEN ? (
+                  <div className="text-center py-8 px-4">
+                    <p className="text-solarized-base01 text-sm mb-2">
+                      📊 Contribution calendar requires a GitHub token
+                    </p>
+                    <p className="text-solarized-base01/70 text-xs">
+                      Add VITE_GITHUB_TOKEN to your .env file to see your
+                      contribution history
+                    </p>
                   </div>
+                ) : (
+                  contributionData.current && (
+                    <div className="w-full">
+                      {/* Month Labels */}
+                      <div className="relative h-5 mb-1 w-full">
+                        {getMonthLabels(contributionData.current.weeks).map(
+                          (month, index) => (
+                            <div
+                              key={index}
+                              className="absolute text-[10px] md:text-xs text-solarized-base01 font-medium"
+                              style={{
+                                left: `${
+                                  (month.weekIndex /
+                                    contributionData.current.weeks.length) *
+                                  100
+                                }%`,
+                              }}
+                            >
+                              {month.name}
+                            </div>
+                          )
+                        )}
+                      </div>
+
+                      {/* Contribution Grid */}
+                      <div className="flex gap-0.5 sm:gap-1 w-full justify-between">
+                        {contributionData.current.weeks.map(
+                          (week, weekIndex) => (
+                            <div
+                              key={weekIndex}
+                              className="flex flex-col gap-0.5 sm:gap-1"
+                            >
+                              {week.contributionDays.map((day) => (
+                                <div
+                                  key={day.date}
+                                  className={`w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] rounded-[1px] ${getContributionColor(
+                                    day.contributionLevel
+                                  )} hover:ring-1 hover:ring-solarized-cyan/50 transition-all cursor-pointer group relative`}
+                                  title={`${
+                                    day.contributionCount
+                                  } contributions on ${new Date(
+                                    day.date
+                                  ).toLocaleDateString()}`}
+                                >
+                                  {/* Tooltip */}
+                                  <div className="opacity-0 group-hover:opacity-100 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-solarized-base03 border border-solarized-blue/30 text-solarized-base2 text-xs rounded whitespace-nowrap pointer-events-none z-20 shadow-lg">
+                                    <div className="font-semibold">
+                                      {day.contributionCount} contributions
+                                    </div>
+                                    <div className="text-solarized-base00">
+                                      {new Date(day.date).toLocaleDateString(
+                                        "en-US",
+                                        {
+                                          weekday: "short",
+                                          month: "short",
+                                          day: "numeric",
+                                          year: "numeric",
+                                        }
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )
                 )}
               </div>
             </motion.div>
