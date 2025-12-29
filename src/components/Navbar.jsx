@@ -8,33 +8,34 @@ const Navbar = ({
   scrollToSection,
 }) => {
   return (
-    <nav className="fixed top-0 w-full bg-solarized-base02/95 z-50 border-b border-solarized-base01">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="text-xl font-bold bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 cursor-pointer">
-            {"<atikshahriaopu/>"}
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl bg-black/30 backdrop-blur-md z-50 border border-white/10 rounded-full shadow-lg">
+      <div className="px-6 sm:px-8">
+        <div className="flex justify-between items-center h-14">
+          <div className="text-2xl font-bold text-white hover:text-cyan-400 transition-colors duration-300 cursor-pointer">
+            Atik Shahriar Opu
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-8">
             {[
               "Home",
               "Skills",
-              "Achivments",
-              "Education",
               "Projects",
+              "Achievements",
+              "Education",
               "Contact",
             ].map((item) => {
               const sectionId =
-                item === "Achivments" ? "experience" : item.toLowerCase();
+                item === "Achievements" ? "experience" : item.toLowerCase();
+              const isActive = activeSection === sectionId;
               return (
                 <button
                   key={item}
                   onClick={() => scrollToSection(sectionId)}
-                  className={`px-5 py-2.5 rounded-full transition-all duration-300 font-medium ${
-                    activeSection === sectionId
-                      ? "bg-solarized-blue text-white shadow-lg shadow-solarized-blue/50"
-                      : "text-solarized-base0 hover:bg-solarized-cyan/20 hover:text-white"
+                  className={`transition-colors duration-300 font-medium text-base ${
+                    isActive
+                      ? "text-white font-semibold"
+                      : "text-gray-300 hover:text-white"
                   }`}
                 >
                   {item}
@@ -55,26 +56,32 @@ const Navbar = ({
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-solarized-base02/95 border-t border-solarized-base01">
+        <div className="md:hidden bg-black/40 backdrop-blur-lg border-t border-white/10">
           <div className="px-4 pt-4 pb-6 space-y-2">
             {[
               "Home",
               "Skills",
-              "Achivments",
-              "Education",
               "Projects",
+              "Achievements",
+              "Education",
+              "GitHub",
               "Contact",
             ].map((item) => {
               const sectionId =
-                item === "Achivments" ? "experience" : item.toLowerCase();
+                item === "Achievements"
+                  ? "experience"
+                  : item === "GitHub"
+                  ? "github"
+                  : item.toLowerCase();
+              const isActive = activeSection === sectionId;
               return (
                 <button
                   key={item}
                   onClick={() => scrollToSection(sectionId)}
-                  className={`block w-full text-left px-5 py-3 rounded-xl transition-all duration-300 font-medium ${
-                    activeSection === sectionId
-                      ? "bg-solarized-blue text-white"
-                      : "text-solarized-base0 hover:bg-solarized-cyan/20 hover:text-white"
+                  className={`block w-full text-left px-5 py-3 rounded-lg transition-all duration-300 font-medium ${
+                    isActive
+                      ? "text-white bg-gray-800 font-semibold"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800"
                   }`}
                 >
                   {item}

@@ -86,8 +86,8 @@ const Contact = () => {
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-green/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-blue/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-green-500/3 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/3 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -103,7 +103,7 @@ const Contact = () => {
               : {}
           }
           transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
         >
           Let&apos;s Connect
         </motion.h2>
@@ -120,7 +120,7 @@ const Contact = () => {
               : {}
           }
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-base sm:text-lg md:text-xl text-solarized-base0 mb-10 sm:mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed px-2"
+          className="text-base sm:text-lg md:text-xl text-gray-300 mb-10 sm:mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed px-2"
         >
           I&apos;m always open to discussing new projects, creative ideas, or
           opportunities to be part of your vision.
@@ -143,10 +143,10 @@ const Contact = () => {
         >
           <a
             href="mailto:atikshariaropu@gmail.com"
-            className="group inline-block glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-solarized-base01 hover:border-solarized-blue transition-all duration-500 hover:scale-105 relative overflow-hidden"
+            className="group inline-block glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:scale-105 relative overflow-hidden"
           >
             {/* Gradient glow */}
-            <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
 
             <div className="relative z-10">
               <motion.div
@@ -165,7 +165,7 @@ const Contact = () => {
               <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-white">
                 Email Me
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-solarized-base0 break-all">
+              <p className="text-base sm:text-lg md:text-xl text-cyan-300 break-all">
                 atikshahriaopu@gmail.com
               </p>
             </div>
@@ -191,17 +191,17 @@ const Contact = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative glass-effect p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl transition-all duration-500 hover:scale-110 border border-solarized-base01 hover:border-solarized-blue hover:bg-solarized-blue/20`}
+                className={`group relative glass-effect p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl transition-all duration-500 hover:scale-110 border border-white/10 hover:border-blue-400/50 hover:bg-blue-500/10`}
               >
                 {/* Gradient glow on hover */}
                 <div
-                  className={`absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-solarized-blue to-solarized-violet opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
+                  className={`absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 ></div>
 
                 <div className="relative z-10">
                   <Icon
                     size={24}
-                    className="text-solarized-base0 sm:w-7 sm:h-7 md:w-8 md:h-8"
+                    className="text-gray-200 group-hover:text-cyan-300 transition-colors duration-300 sm:w-7 sm:h-7 md:w-8 md:h-8"
                   />
                 </div>
 

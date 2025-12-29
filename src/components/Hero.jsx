@@ -42,9 +42,9 @@ const Hero = ({ scrollToSection }) => {
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-blue/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-cyan/10 rounded-full blur-3xl animate-pulse delay-700"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-solarized-violet/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-700"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
@@ -72,7 +72,7 @@ const Hero = ({ scrollToSection }) => {
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight px-2 lg:px-0"
             >
               I&apos;m{" "}
-              <span className="bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
                 ATIK SHAHRIA OPU
               </span>
             </motion.h2>
@@ -81,7 +81,7 @@ const Hero = ({ scrollToSection }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-solarized-cyan min-h-[2.5rem] sm:min-h-[3rem] flex items-center justify-center lg:justify-start px-2 lg:px-0"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-cyan-400 min-h-[2.5rem] sm:min-h-[3rem] flex items-center justify-center lg:justify-start px-2 lg:px-0"
             >
               <span>{text}</span>
               <span className="animate-blink">|</span>
@@ -98,7 +98,7 @@ const Hero = ({ scrollToSection }) => {
                 href="https://github.com/atikshahriaopu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-blue-800/20 transition-all hover:scale-110 shadow-lg"
+                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-cyan-500/20 transition-all hover:scale-110 shadow-lg text-gray-200 hover:text-cyan-300"
               >
                 <Github size={20} className="sm:w-6 sm:h-6" />
               </a>
@@ -106,7 +106,7 @@ const Hero = ({ scrollToSection }) => {
                 href="https://linkedin.com/in/atikshahriaopu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-blue-800/20 transition-all hover:scale-110 shadow-lg"
+                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-blue-500/20 transition-all hover:scale-110 shadow-lg text-gray-200 hover:text-blue-300"
               >
                 <Linkedin size={20} className="sm:w-6 sm:h-6" />
               </a>
@@ -114,13 +114,13 @@ const Hero = ({ scrollToSection }) => {
                 href="https://facebook.com/atikshahriaopu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-blue-800/20 transition-all hover:scale-110 shadow-lg"
+                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-blue-500/20 transition-all hover:scale-110 shadow-lg text-gray-200 hover:text-blue-300"
               >
                 <Facebook size={20} className="sm:w-6 sm:h-6" />
               </a>
               <a
                 href="mailto:atikshariaropu@gmail.com"
-                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-blue-800/20 transition-all hover:scale-110 shadow-lg"
+                className="p-3 sm:p-4 glass-effect rounded-full hover:bg-purple-500/20 transition-all hover:scale-110 shadow-lg text-gray-200 hover:text-purple-300"
               >
                 <Mail size={20} className="sm:w-6 sm:h-6" />
               </a>
@@ -135,14 +135,14 @@ const Hero = ({ scrollToSection }) => {
             >
               <button
                 onClick={() => scrollToSection("contact")}
-                className="px-8 sm:px-10 py-3 sm:py-4 bg-solarized-cyan text-white rounded-full font-semibold hover:bg-solarized-blue hover:scale-105 transition-all text-sm sm:text-base shadow-lg hover:shadow-solarized-cyan/50 hover:shadow-2xl"
+                className="px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full font-semibold hover:from-cyan-400 hover:to-blue-400 hover:scale-105 transition-all text-sm sm:text-base shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/60 hover:shadow-2xl"
               >
                 Contact Me
               </button>
               <a
                 href="\CV\Atik_Shahria_Opu.pdf"
                 download
-                className="px-8 sm:px-10 py-3 sm:py-4 glass-effect rounded-full font-semibold text-white hover:bg-solarized-violet hover:text-white transition-all flex items-center justify-center gap-2 hover:scale-105 text-sm sm:text-base shadow-lg border-2 border-solarized-violet"
+                className="px-8 sm:px-10 py-3 sm:py-4 glass-effect rounded-full font-semibold text-white hover:bg-purple-500/20 hover:text-cyan-300 transition-all flex items-center justify-center gap-2 hover:scale-105 text-sm sm:text-base shadow-lg border-2 border-purple-500 hover:border-purple-400"
               >
                 <Download size={18} className="sm:w-5 sm:h-5" /> Get Resume
               </a>

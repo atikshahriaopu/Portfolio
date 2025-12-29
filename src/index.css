@@ -6,13 +6,15 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    @apply overflow-x-hidden bg-solarized-base03;
+    @apply overflow-x-hidden;
+    background-color: #060817;
   }
 
   /* Improve mobile touch targets */
-  button, a {
+  button,
+  a {
     -webkit-tap-highlight-color: rgba(38, 139, 210, 0.3);
   }
 
@@ -130,7 +132,8 @@
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {
@@ -139,7 +142,8 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 20px rgba(38, 139, 210, 0.3);
     }
     50% {
@@ -180,23 +184,28 @@
   }
 
   .glass-effect {
-    @apply bg-solarized-base02/80 border border-solarized-base01/50;
+    @apply bg-black/40 backdrop-blur-md border border-white/10;
   }
 
   .gradient-border {
     position: relative;
-    background: linear-gradient(to right, rgba(38, 139, 210, 0.1), rgba(42, 161, 152, 0.1));
+    background: linear-gradient(
+      to right,
+      rgba(38, 139, 210, 0.1),
+      rgba(42, 161, 152, 0.1)
+    );
     border-radius: 1rem;
   }
 
   .gradient-border::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     border-radius: 1rem;
     padding: 1px;
     background: linear-gradient(135deg, #268bd2, #2aa198);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
   }
@@ -208,7 +217,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #073642;
+    background: #060817;
   }
 
   ::-webkit-scrollbar-thumb {
