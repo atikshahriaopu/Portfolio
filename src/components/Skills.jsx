@@ -124,7 +124,7 @@ const Skills = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="py-16 sm:py-24 relative overflow-hidden"
+      className="pt-40 sm:pt-48 md:pt-56 pb-12 sm:pb-18 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
         <motion.h2
@@ -139,7 +139,7 @@ const Skills = () => {
               : {}
           }
           transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
         >
           Skills & Technologies
         </motion.h2>
@@ -181,7 +181,7 @@ const Skills = () => {
                 </div>
 
                 {/* Skill Name */}
-                <p className="text-sm sm:text-base font-medium text-white/80 group-hover:text-cyan-300 transition-colors duration-300 text-center">
+                <p className="text-sm sm:text-base font-medium text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 text-center">
                   {skill.name}
                 </p>
               </motion.div>

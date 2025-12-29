@@ -37,7 +37,7 @@ const Education = () => {
               : {}
           }
           transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
         >
           Education
         </motion.h2>
@@ -155,7 +155,7 @@ const Education = () => {
                   {courses.map((course, index) => (
                     <span
                       key={index}
-                      className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 transition-all duration-300 hover:scale-105 hover:bg-cyan-500/30"
+                      className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-solarized-cyan/20 text-solarized-cyan border border-solarized-cyan/40 transition-all duration-300 hover:scale-105 hover:bg-solarized-cyan/30"
                     >
                       {course.name}
                     </span>

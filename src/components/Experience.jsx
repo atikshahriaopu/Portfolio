@@ -109,7 +109,7 @@ const Experience = () => {
               : {}
           }
           transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
         >
           Achievements & Experience
         </motion.h2>
@@ -149,14 +149,14 @@ const Experience = () => {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
-                      <h3 className="text-lg sm:text-xl font-bold text-white group-hover:scale-105 transition-transform duration-300 pr-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-solarized-base2 group-hover:scale-105 transition-transform duration-300 pr-2">
                         {exp.title}
                       </h3>
-                      <span className="px-3 sm:px-4 py-1.5 sm:py-2 glass-effect rounded-full text-xs sm:text-sm font-semibold text-cyan-300 border border-cyan-400/40 whitespace-nowrap self-start">
+                      <span className="px-3 sm:px-4 py-1.5 sm:py-2 glass-effect rounded-full text-xs sm:text-sm font-semibold text-solarized-cyan border border-solarized-cyan/40 whitespace-nowrap self-start">
                         {exp.year}
                       </span>
                     </div>
-                    <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+                    <p className="text-solarized-base1 text-sm sm:text-base leading-relaxed">
                       {exp.team}
                     </p>
                   </div>
@@ -184,8 +184,8 @@ const Experience = () => {
           className="mt-16"
         >
           <div className="relative">
-            <div className="glass-effect rounded-3xl p-10 sm:p-12 border-2 border-blue-400/40 bg-black/20 overflow-hidden">
-              <h3 className="text-center text-2xl sm:text-3xl font-bold mb-10 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative z-10">
+            <div className="glass-effect rounded-3xl p-10 sm:p-12 border-2 border-solarized-blue/40 bg-black/20 overflow-hidden">
+              <h3 className="text-center text-2xl sm:text-3xl font-bold mb-10 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent relative z-10">
                 Competitive Programming Stats
               </h3>
 
@@ -195,15 +195,15 @@ const Experience = () => {
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center relative group/stat"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-2xl blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative glass-effect rounded-2xl p-6 border border-blue-400/30 hover:border-blue-400 transition-all duration-300">
-                    <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-cyan-400 to-blue-500 bg-clip-text text-transparent leading-tight">
+                  <div className="absolute inset-0 bg-gradient-to-br from-solarized-blue/30 to-solarized-cyan/30 rounded-2xl blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative glass-effect rounded-2xl p-6 border border-solarized-cyan/30 hover:border-solarized-cyan transition-all duration-300">
+                    <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-solarized-cyan to-solarized-blue bg-clip-text text-transparent leading-tight">
                       650+
                     </div>
-                    <div className="text-gray-300 text-sm sm:text-base font-medium mb-1">
+                    <div className="text-solarized-base1 text-sm sm:text-base font-medium mb-1">
                       Problems Solved
                     </div>
-                    <div className="text-cyan-400 text-xs sm:text-sm font-semibold">
+                    <div className="text-solarized-cyan text-xs sm:text-sm font-semibold">
                       Codeforces
                     </div>
                   </div>
@@ -214,15 +214,15 @@ const Experience = () => {
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center relative group/stat"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative glass-effect rounded-2xl p-6 border border-purple-400/30 hover:border-purple-400 transition-all duration-300">
-                    <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text text-transparent leading-tight">
+                  <div className="absolute inset-0 bg-gradient-to-br from-solarized-violet/30 to-solarized-magenta/30 rounded-2xl blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative glass-effect rounded-2xl p-6 border border-solarized-violet/30 hover:border-solarized-violet transition-all duration-300">
+                    <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-solarized-violet to-solarized-magenta bg-clip-text text-transparent leading-tight">
                       1200+
                     </div>
-                    <div className="text-gray-300 text-sm sm:text-base font-medium mb-1">
+                    <div className="text-solarized-base1 text-sm sm:text-base font-medium mb-1">
                       Total Problems
                     </div>
-                    <div className="text-purple-400 text-xs sm:text-sm font-semibold">
+                    <div className="text-solarized-violet text-xs sm:text-sm font-semibold">
                       All Platforms
                     </div>
                   </div>
@@ -233,15 +233,15 @@ const Experience = () => {
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center relative group/stat"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/30 to-cyan-500/30 rounded-2xl blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative glass-effect rounded-2xl p-6 border border-green-400/30 hover:border-green-400 transition-all duration-300">
-                    <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-green-500 to-cyan-500 bg-clip-text text-transparent leading-tight">
+                  <div className="absolute inset-0 bg-gradient-to-br from-solarized-green/30 to-solarized-cyan/30 rounded-2xl blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative glass-effect rounded-2xl p-6 border border-solarized-green/30 hover:border-solarized-green transition-all duration-300">
+                    <div className="text-6xl sm:text-7xl font-black mb-3 bg-gradient-to-br from-solarized-green to-solarized-cyan bg-clip-text text-transparent leading-tight">
                       100+
                     </div>
-                    <div className="text-gray-300 text-sm sm:text-base font-medium mb-1">
+                    <div className="text-solarized-base1 text-sm sm:text-base font-medium mb-1">
                       Contests
                     </div>
-                    <div className="text-green-400 text-xs sm:text-sm font-semibold">
+                    <div className="text-solarized-green text-xs sm:text-sm font-semibold">
                       Participated
                     </div>
                   </div>

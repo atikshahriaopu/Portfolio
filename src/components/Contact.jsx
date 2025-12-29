@@ -103,7 +103,7 @@ const Contact = () => {
               : {}
           }
           transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
         >
           Let&apos;s Connect
         </motion.h2>
@@ -120,7 +120,7 @@ const Contact = () => {
               : {}
           }
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-base sm:text-lg md:text-xl text-gray-300 mb-10 sm:mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed px-2"
+          className="text-base sm:text-lg md:text-xl text-solarized-base1 mb-10 sm:mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed px-2"
         >
           I&apos;m always open to discussing new projects, creative ideas, or
           opportunities to be part of your vision.
@@ -162,10 +162,10 @@ const Contact = () => {
                 </div>
               </motion.div>
 
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-white">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-solarized-base2">
                 Email Me
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-cyan-300 break-all">
+              <p className="text-base sm:text-lg md:text-xl text-solarized-cyan break-all">
                 atikshahriaopu@gmail.com
               </p>
             </div>
@@ -201,7 +201,7 @@ const Contact = () => {
                 <div className="relative z-10">
                   <Icon
                     size={24}
-                    className="text-gray-200 group-hover:text-cyan-300 transition-colors duration-300 sm:w-7 sm:h-7 md:w-8 md:h-8"
+                    className="text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 sm:w-7 sm:h-7 md:w-8 md:h-8"
                   />
                 </div>
 

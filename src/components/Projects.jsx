@@ -151,7 +151,7 @@ const Projects = () => {
                 : {}
             }
             transition={{ duration: 0.6 }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 text-center bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent"
           >
             Featured Projects
           </motion.h2>
@@ -189,7 +189,7 @@ const Projects = () => {
 
                   <div className="relative z-10 px-4 pb-4 sm:px-5 sm:pb-5 flex flex-col">
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-bold mb-4 text-white min-h-[3.5rem]">
+                    <h3 className="text-lg sm:text-xl font-bold mb-4 text-solarized-base2 min-h-[3.5rem]">
                       {project.title}
                     </h3>
 
@@ -198,7 +198,7 @@ const Projects = () => {
                       {project.tech.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-2 py-1 rounded-full text-xs font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 whitespace-nowrap"
+                          className="px-2 py-1 rounded-full text-xs font-medium bg-solarized-cyan/20 text-solarized-cyan border border-solarized-cyan/40 whitespace-nowrap"
                         >
                           {tech}
                         </span>
@@ -213,7 +213,7 @@ const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium text-xs transition-all duration-300 hover:scale-105"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-solarized-cyan to-solarized-blue hover:from-solarized-cyan hover:to-solarized-violet text-solarized-base3 font-medium text-xs transition-all duration-300 hover:scale-105"
                         >
                           <ExternalLink size={14} />
                           View Project
@@ -260,11 +260,11 @@ const Projects = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-16 text-center"
           >
-            <p className="text-gray-200 text-xl mb-6">
+            <p className="text-solarized-base1 text-xl mb-6">
               More projects coming soon...
             </p>
-            <div className="inline-block glass-effect px-8 py-4 rounded-full border border-white/10 hover:border-cyan-400/50 hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105">
-              <span className="text-cyan-400 font-medium text-lg">
+            <div className="inline-block glass-effect px-8 py-4 rounded-full border border-white/10 hover:border-solarized-cyan/50 hover:bg-solarized-cyan/10 transition-all duration-300 hover:scale-105">
+              <span className="text-solarized-cyan font-medium text-lg">
                 🚀 Currently building amazing things
               </span>
             </div>
@@ -310,7 +310,7 @@ const Projects = () => {
 
               {/* Project Details */}
               <div className="p-6 sm:p-8">
-                <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent">
                   {selectedProject.title}
                 </h3>
 
@@ -320,7 +320,7 @@ const Projects = () => {
                     {selectedProject.tech.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-4 py-2 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-400/40"
+                        className="px-4 py-2 rounded-full text-sm font-medium bg-solarized-cyan/20 text-solarized-cyan border border-solarized-cyan/40"
                       >
                         {tech}
                       </span>
@@ -330,7 +330,7 @@ const Projects = () => {
 
                 {/* Full Description */}
                 <div className="mb-6">
-                  <p className="text-gray-200 leading-relaxed">
+                  <p className="text-solarized-base1 leading-relaxed">
                     {selectedProject.fullDescription}
                   </p>
                 </div>
@@ -341,7 +341,7 @@ const Projects = () => {
                     {selectedProject.tags.map((tag, i) => (
                       <span
                         key={i}
-                        className="px-4 py-2 rounded-lg text-sm font-medium bg-purple-500/20 text-purple-300 border border-purple-400/40"
+                        className="px-4 py-2 rounded-lg text-sm font-medium bg-solarized-violet/20 text-solarized-violet border border-solarized-violet/40"
                       >
                         {tag}
                       </span>
@@ -356,7 +356,7 @@ const Projects = () => {
                       href={selectedProject.projectLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium transition-all duration-300 hover:scale-105"
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-solarized-cyan to-solarized-blue hover:from-solarized-cyan hover:to-solarized-violet text-solarized-base3 font-medium transition-all duration-300 hover:scale-105"
                     >
                       <ExternalLink size={18} />
                       View Live Project
@@ -366,7 +366,7 @@ const Projects = () => {
                     href={selectedProject.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-800/80 hover:bg-gray-700/80 text-white font-medium border border-gray-600/50 transition-all duration-300 hover:scale-105"
+                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-800/80 hover:bg-gray-700/80 text-solarized-base2 font-medium border border-gray-600/50 transition-all duration-300 hover:scale-105"
                   >
                     <Code size={18} />
                     View Source Code

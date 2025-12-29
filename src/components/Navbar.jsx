@@ -11,7 +11,7 @@ const Navbar = ({
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl bg-black/30 backdrop-blur-md z-50 border border-white/10 rounded-full shadow-lg">
       <div className="px-6 sm:px-8">
         <div className="flex justify-between items-center h-14">
-          <div className="text-2xl font-bold text-white hover:text-cyan-400 transition-colors duration-300 cursor-pointer">
+          <div className="text-2xl font-bold text-solarized-base2 hover:text-solarized-cyan transition-colors duration-300 cursor-pointer">
             Atik Shahriar Opu
           </div>
 
@@ -34,8 +34,8 @@ const Navbar = ({
                   onClick={() => scrollToSection(sectionId)}
                   className={`transition-colors duration-300 font-medium text-base ${
                     isActive
-                      ? "text-white font-semibold"
-                      : "text-gray-300 hover:text-white"
+                      ? "text-solarized-cyan font-semibold"
+                      : "text-solarized-base1 hover:text-solarized-base2"
                   }`}
                 >
                   {item}
@@ -80,8 +80,8 @@ const Navbar = ({
                   onClick={() => scrollToSection(sectionId)}
                   className={`block w-full text-left px-5 py-3 rounded-lg transition-all duration-300 font-medium ${
                     isActive
-                      ? "text-white bg-gray-800 font-semibold"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800"
+                      ? "text-solarized-cyan bg-gray-800 font-semibold"
+                      : "text-solarized-base1 hover:text-solarized-base2 hover:bg-gray-800"
                   }`}
                 >
                   {item}
