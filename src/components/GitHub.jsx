@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Github, Users, GitFork, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import { styles } from "../styles";
 
 const GitHub = () => {
   const { animationState, sectionRef } = useScrollAnimation();
@@ -35,12 +36,12 @@ const GitHub = () => {
           `https://api.github.com/users/${username}`,
           {
             headers,
-          }
+          },
         );
         if (!userRes.ok) {
           if (userRes.status === 401 || userRes.status === 403) {
             throw new Error(
-              "GitHub API rate limit exceeded or authentication required. Please add a GitHub token to your .env file."
+              "GitHub API rate limit exceeded or authentication required. Please add a GitHub token to your .env file.",
             );
           }
           throw new Error(`Failed to fetch user data: ${userRes.status}`);
@@ -139,7 +140,7 @@ const GitHub = () => {
         if (graphqlData.errors) {
           console.error("GraphQL errors:", graphqlData.errors);
           throw new Error(
-            graphqlData.errors[0]?.message || "GraphQL query failed"
+            graphqlData.errors[0]?.message || "GraphQL query failed",
           );
         }
 
@@ -171,7 +172,7 @@ const GitHub = () => {
         setLoading(false);
       }
     },
-    [username, GITHUB_TOKEN, CACHE_KEY, CACHE_DURATION]
+    [username, GITHUB_TOKEN, CACHE_KEY, CACHE_DURATION],
   );
 
   useEffect(() => {
@@ -260,42 +261,44 @@ const GitHub = () => {
             animationState === "visible"
               ? { opacity: 1, y: 0 }
               : animationState === "fadeOut"
-              ? { opacity: 0, y: -20 }
-              : animationState === "static"
-              ? { opacity: 1, y: 0 }
-              : {}
+                ? { opacity: 0, y: -20 }
+                : animationState === "static"
+                  ? { opacity: 1, y: 0 }
+                  : {}
           }
           transition={{ duration: 0.6 }}
           className="text-center mb-4 sm:mb-6"
         >
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
-            <Github className="w-5 h-5 sm:w-6 sm:h-6 text-solarized-cyan" />
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-solarized-cyan via-solarized-blue to-solarized-violet bg-clip-text text-transparent">
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
+            <div className="flex items-center justify-center gap-3 sm:gap-4">
+              <Github className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-[#B8B8FF]" />
+              <button
+                onClick={handleRefresh}
+                disabled={loading || refreshing}
+                className="p-2 sm:p-2.5 md:p-3 rounded-lg bg-[#B8B8FF]/10 hover:bg-[#B8B8FF]/20 border border-[#B8B8FF]/30 hover:border-[#B8B8FF]/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+                title="Refresh GitHub data"
+              >
+                <RefreshCw
+                  className={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#B8B8FF] ${
+                    refreshing
+                      ? "animate-spin"
+                      : "group-hover:rotate-180 transition-transform duration-500"
+                  }`}
+                />
+              </button>
+            </div>
+            <h2 className={`${styles.sectionHeadText}`}>
               GitHub Contributions
             </h2>
-            <button
-              onClick={handleRefresh}
-              disabled={loading || refreshing}
-              className="ml-2 p-1.5 sm:p-2 rounded-lg bg-solarized-cyan/10 hover:bg-solarized-cyan/20 border border-solarized-cyan/30 hover:border-solarized-cyan/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
-              title="Refresh GitHub data"
-            >
-              <RefreshCw
-                className={`w-4 h-4 sm:w-5 sm:h-5 text-solarized-cyan ${
-                  refreshing
-                    ? "animate-spin"
-                    : "group-hover:rotate-180 transition-transform duration-500"
-                }`}
-              />
-            </button>
           </div>
-          <p className="text-solarized-base01 text-xs sm:text-sm">
+          <p className="text-solarized-base01 text-xs sm:text-sm mt-2">
             My coding journey visualized through contributions and achievements
           </p>
         </motion.div>
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-solarized-cyan"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#B8B8FF]"></div>
           </div>
         ) : error ? (
           <div className="bg-red-500/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-8 text-center">
@@ -338,10 +341,10 @@ const GitHub = () => {
               animationState === "visible"
                 ? { opacity: 1 }
                 : animationState === "fadeOut"
-                ? { opacity: 0 }
-                : animationState === "static"
-                ? { opacity: 1 }
-                : {}
+                  ? { opacity: 0 }
+                  : animationState === "static"
+                    ? { opacity: 1 }
+                    : {}
             }
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-4"
@@ -353,16 +356,16 @@ const GitHub = () => {
                 animationState === "visible"
                   ? { opacity: 1, y: 0 }
                   : animationState === "fadeOut"
-                  ? { opacity: 0, y: 20 }
-                  : animationState === "static"
-                  ? { opacity: 1, y: 0 }
-                  : {}
+                    ? { opacity: 0, y: 20 }
+                    : animationState === "static"
+                      ? { opacity: 1, y: 0 }
+                      : {}
               }
               transition={{ duration: 0.6, delay: 0.3 }}
               className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 max-w-2xl mx-auto"
             >
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-cyan/40 hover:scale-105 transition-all duration-300">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-blue/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 md:hover:border-solarized-cyan/40 md:hover:scale-105 transition-all duration-300">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-blue/10 to-solarized-cyan/10 opacity-0 md:group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-cyan" />
                   <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
@@ -374,8 +377,8 @@ const GitHub = () => {
                 </div>
               </div>
 
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-green/40 hover:scale-105 transition-all duration-300">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-green/10 to-solarized-cyan/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 md:hover:border-solarized-green/40 md:hover:scale-105 transition-all duration-300">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-green/10 to-solarized-cyan/10 opacity-0 md:group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-green" />
                   <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
@@ -387,8 +390,8 @@ const GitHub = () => {
                 </div>
               </div>
 
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-violet/40 hover:scale-105 transition-all duration-300">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-violet/10 to-solarized-magenta/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 md:hover:border-solarized-violet/40 md:hover:scale-105 transition-all duration-300">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-violet/10 to-solarized-magenta/10 opacity-0 md:group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <GitFork className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-violet" />
                   <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
@@ -400,8 +403,8 @@ const GitHub = () => {
                 </div>
               </div>
 
-              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 hover:border-solarized-orange/40 hover:scale-105 transition-all duration-300">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-orange/10 to-solarized-red/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
+              <div className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 md:hover:border-solarized-orange/40 md:hover:scale-105 transition-all duration-300">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-solarized-orange/10 to-solarized-red/10 opacity-0 md:group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-1 sm:space-y-2">
                   <Github className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-solarized-orange" />
                   <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm">
@@ -421,10 +424,10 @@ const GitHub = () => {
                 animationState === "visible"
                   ? { opacity: 1, y: 0 }
                   : animationState === "fadeOut"
-                  ? { opacity: 0, y: 20 }
-                  : animationState === "static"
-                  ? { opacity: 1, y: 0 }
-                  : {}
+                    ? { opacity: 0, y: 20 }
+                    : animationState === "static"
+                      ? { opacity: 1, y: 0 }
+                      : {}
               }
               transition={{ duration: 0.6, delay: 0.5 }}
               className="relative bg-gradient-to-br from-solarized-base02/80 to-solarized-base03/80 backdrop-blur-sm border border-solarized-blue/20 rounded-lg p-3 sm:p-4"
@@ -482,7 +485,7 @@ const GitHub = () => {
                             >
                               {month.name}
                             </div>
-                          )
+                          ),
                         )}
                       </div>
 
@@ -498,16 +501,16 @@ const GitHub = () => {
                                 <div
                                   key={day.date}
                                   className={`w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] rounded-[1px] ${getContributionColor(
-                                    day.contributionLevel
-                                  )} hover:ring-1 hover:ring-solarized-cyan/50 transition-all cursor-pointer group relative`}
+                                    day.contributionLevel,
+                                  )} md:hover:ring-1 md:hover:ring-solarized-cyan/50 transition-all cursor-pointer group relative`}
                                   title={`${
                                     day.contributionCount
                                   } contributions on ${new Date(
-                                    day.date
+                                    day.date,
                                   ).toLocaleDateString()}`}
                                 >
                                   {/* Tooltip */}
-                                  <div className="opacity-0 group-hover:opacity-100 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-solarized-base03 border border-solarized-blue/30 text-solarized-base2 text-xs rounded whitespace-nowrap pointer-events-none z-20 shadow-lg">
+                                  <div className="opacity-0 md:group-hover:opacity-100 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-solarized-base03 border border-solarized-blue/30 text-solarized-base2 text-xs rounded whitespace-nowrap pointer-events-none z-20 shadow-lg">
                                     <div className="font-semibold">
                                       {day.contributionCount} contributions
                                     </div>
@@ -519,14 +522,14 @@ const GitHub = () => {
                                           month: "short",
                                           day: "numeric",
                                           year: "numeric",
-                                        }
+                                        },
                                       )}
                                     </div>
                                   </div>
                                 </div>
                               ))}
                             </div>
-                          )
+                          ),
                         )}
                       </div>
                     </div>

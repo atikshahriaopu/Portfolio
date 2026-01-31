@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
+import Achievement from "./components/Achievement";
 import Education from "./components/Education";
 import Projects from "./components/Projects";
 import GitHub from "./components/GitHub";
@@ -13,9 +14,28 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Scroll to top on page load/refresh
+  // Scroll to top on page load/refresh and handle initial hash
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Check if there's a hash in the URL on load
+    const hash = window.location.hash.substring(1); // Remove the '#'
+    if (hash) {
+      // Wait for components to render, then scroll to section
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "auto",
+          });
+          setActiveSection(hash);
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
     window.history.scrollRestoration = "manual";
   }, []);
 
@@ -26,6 +46,7 @@ const App = () => {
         "skills",
         "projects",
         "experience",
+        "achievements",
         "education",
         "github",
         "contact",
@@ -38,7 +59,12 @@ const App = () => {
         }
         return false;
       });
-      if (current) setActiveSection(current);
+      if (current) {
+        setActiveSection(current);
+        // Update URL without page reload
+        const newUrl = current === "home" ? "/" : `/#${current}`;
+        window.history.replaceState(null, "", newUrl);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -57,6 +83,10 @@ const App = () => {
         behavior: "auto", // Changed from "smooth" to "auto" for instant scrolling
       });
       setIsMenuOpen(false);
+
+      // Update URL when clicking navigation
+      const newUrl = id === "home" ? "/" : `/#${id}`;
+      window.history.pushState(null, "", newUrl);
     }
   };
 
@@ -72,15 +102,16 @@ const App = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Navbar - Outside content wrapper for proper z-index */}
+      <Navbar
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
       {/* Content */}
       <div className="relative z-10">
-        <Navbar
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-          activeSection={activeSection}
-          scrollToSection={scrollToSection}
-        />
-
         <Hero scrollToSection={scrollToSection} />
 
         <Skills />
@@ -88,6 +119,8 @@ const App = () => {
         <Projects />
 
         <Experience />
+
+        <Achievement />
 
         <Education />
 

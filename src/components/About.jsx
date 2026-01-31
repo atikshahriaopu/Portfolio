@@ -5,37 +5,45 @@ const About = () => {
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-solarized-violet to-solarized-cyan bg-clip-text text-transparent">
           About Me
         </h2>
-        <div className="bg-solarized-base02/90 rounded-lg p-6 sm:p-8 border border-solarized-base01 hover:border-solarized-cyan transition-all duration-500 hover:bg-solarized-cyan/10">
+        <div className="bg-solarized-base02/90 rounded-lg p-6 sm:p-8 border border-solarized-base01 md:hover:border-solarized-cyan transition-all duration-500 md:hover:bg-solarized-cyan/10">
           <p className="text-sm sm:text-base text-solarized-base1 leading-relaxed mb-4 sm:mb-6">
-            I&apos;m{" "}
+            I&apos;m a{" "}
             <span className="text-solarized-cyan font-semibold">
-              Atik Shahria Opu
-            </span>
-            , a passionate software developer and competitive programmer from
-            Dhaka, Bangladesh. Currently pursuing my BSc in Computer Science &
-            Engineering at the University of Information Technology & Sciences
-            (UITS), expected to graduate in 2026.
+              results-driven Full-Stack Developer
+            </span>{" "}
+            specializing in building scalable web applications with modern
+            technologies. Currently pursuing BSc in Computer Science &
+            Engineering at UITS (Expected graduation: 2026).
           </p>
           <p className="text-sm sm:text-base text-solarized-base1 leading-relaxed mb-4 sm:mb-6">
-            With over{" "}
             <span className="text-solarized-cyan font-semibold">
-              1200+ problems solved
+              Technical Expertise:
             </span>{" "}
-            across multiple platforms including Codeforces, LeetCode, CodeChef,
-            UVA, LightOJ, SPOJ, and, CSS I&apos;ve honed my problem-solving
-            skills through participation in{" "}
+            Proficient in React.js, Node.js, Express.js, and MongoDB with
+            hands-on experience in building RESTful APIs, implementing
+            authentication systems, and integrating CMS platforms. Delivered
+            multiple production-ready applications with responsive UI/UX and
+            optimized performance.
+          </p>
+          <p className="text-sm sm:text-base text-solarized-base1 leading-relaxed mb-4 sm:mb-6">
             <span className="text-solarized-cyan font-semibold">
-              100+ programming contests
-            </span>
-            . My experience includes competing in ICPC Dhaka Regional
-            Preliminaries and achieving top rankings in university contests.
+              Problem-Solving Track Record:
+            </span>{" "}
+            Solved 1200+ competitive programming problems across multiple
+            platforms (Codeforces, LeetCode, CodeChef, SPOJ), demonstrating
+            strong algorithmic thinking. Competed in 3 consecutive ICPC Dhaka
+            Regional Preliminaries and ranked 6th in UITS Intra Contest among
+            60+ teams, showcasing ability to perform under pressure.
           </p>
           <p className="text-sm sm:text-base text-solarized-base1 leading-relaxed">
-            I specialize in building modern web applications using React,
-            Node.js, and MongoDB, with a keen interest in AI-driven development
-            and scalable architectures. Beyond coding, I&apos;m passionate about
-            mentoring junior students in competitive programming and helping
-            them develop strong algorithmic thinking.
+            <span className="text-solarized-cyan font-semibold">
+              Value Proposition:
+            </span>{" "}
+            I combine strong technical skills with proven problem-solving
+            abilities to deliver efficient, maintainable solutions. My
+            experience mentoring junior developers and competing in team-based
+            contests demonstrates collaboration and communication skills
+            essential for modern development teams.
           </p>
         </div>
       </div>

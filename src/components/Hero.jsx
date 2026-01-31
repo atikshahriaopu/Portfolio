@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
 
 const Hero = () => {
   const [text, setText] = useState("");
@@ -19,7 +18,7 @@ const Hero = () => {
       setText(
         isDeleting
           ? fullText.substring(0, text.length - 1)
-          : fullText.substring(0, text.length + 1)
+          : fullText.substring(0, text.length + 1),
       );
 
       setTypingSpeed(isDeleting ? 75 : 150);
@@ -37,12 +36,31 @@ const Hero = () => {
   }, [text, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <section id="home" className={`relative w-full h-screen mx-auto`}>
+    <section
+      id="home"
+      className={`relative w-full mx-auto pt-[120px] sm:pt-[140px] pb-12 sm:pb-16 md:pb-20`}
+    >
       <div
-        className={`absolute inset-0 top-[100px] sm:top-[120px] max-w-full mx-auto ${styles.paddingX} flex flex-col`}
+        className={`max-w-7xl mx-auto ${styles.paddingX} flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8`}
       >
-        {/* Top: Text content */}
-        <div className="flex flex-row items-start gap-3 sm:gap-5 z-10">
+        {/* Profile Picture - shows first on mobile, right on desktop */}
+        <div className="flex items-center justify-center lg:justify-end lg:order-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80"
+          >
+            <img
+              src="/my_picture/dp.jpg"
+              alt="Atik Shahria Opu"
+              className="w-full h-full object-cover object-[center_30%] rounded-full border-4 border-[#B8B8FF]"
+            />
+          </motion.div>
+        </div>
+
+        {/* Text content - shows second on mobile, left on desktop */}
+        <div className="flex flex-row items-start gap-3 sm:gap-5 z-10 flex-1 lg:order-1">
           <div className="flex flex-col justify-center items-center mt-3 sm:mt-5">
             {/* <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#915EFF]" /> */}
             <div className="w-1 h-12 sm:h-16 violet-gradient" />
@@ -51,41 +69,28 @@ const Hero = () => {
           <div>
             <h1 className="font-black text-white text-[28px] xs:text-[36px] sm:text-[50px] lg:text-[70px] leading-[36px] xs:leading-[44px] sm:leading-[60px] lg:leading-[88px] mt-2">
               Hi, I&apos;m{" "}
-              <span className="bg-gradient-to-r from-solarized-violet via-solarized-blue to-solarized-cyan bg-clip-text text-transparent">
-                Atik Shahria Opu
-              </span>
+              <span className="text-[#B8B8FF]">Atik Shahria Opu</span>
             </h1>
             <p className="text-solarized-base1 font-medium text-[15px] xs:text-[18px] sm:text-[26px] lg:text-[30px] leading-[24px] xs:leading-[28px] sm:leading-[36px] lg:leading-[40px] mt-2">
               {text}
               <span className="animate-pulse text-solarized-cyan">|</span>
             </p>
+            <p className="text-solarized-base1 text-[14px] xs:text-[16px] sm:text-[18px] lg:text-[20px] leading-[22px] xs:leading-[24px] sm:leading-[28px] lg:leading-[32px] mt-4 max-w-3xl">
+              Backend Developer specializing in scalable web applications. 1200+
+              problems solved | Building efficient solutions with Node.js,
+              Express, and MongoDB.
+            </p>
+            <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 sm:mt-8">
+              <a
+                href="/CV/Atik_Shahria_Opu_Resume.pdf"
+                download
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-solarized-violet text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-solarized-violet/50 transition-all duration-300 text-sm sm:text-base"
+              >
+                Download Resume
+              </a>
+            </div>
           </div>
         </div>
-
-        {/* Center: 3D Computer - taking more space */}
-        <div className="flex-1 w-full mt-4 sm:mt-2 flex items-center justify-center">
-          <div className="w-full h-full max-h-[400px] sm:max-h-[600px] lg:max-h-[800px]">
-            <ComputersCanvas />
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-2 xs:-bottom-5 sm:-bottom-8 w-full flex justify-center items-center">
-        <a href="#about">
-          <div className="w-[28px] h-[50px] sm:w-[30px] sm:h-[56px] rounded-3xl border-3 sm:border-4 border-solarized-cyan flex justify-center items-start p-2">
-            <motion.div
-              animate={{
-                y: [0, 20, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-solarized-cyan mb-1"
-            />
-          </div>
-        </a>
       </div>
     </section>
   );

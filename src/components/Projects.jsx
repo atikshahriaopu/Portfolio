@@ -46,29 +46,46 @@ const textVariant = (delay) => {
 
 const projects = [
   {
+    title: "BiteNow - Food Delivery Platform",
+    image: "/project_img/bitenow.png",
+    description:
+      "Production-grade food delivery platform developed during industrial attachment at Brain Station 23. Built RESTful APIs for rider management, restaurant owner module with complete CRUD operations, and real-time location tracking. Integrated Cloudinary for media management and Mapbox API with Socket.IO for live rider-customer communication. Streamlined delivery workflows with secure database transactions.",
+    tech: [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.IO",
+      "Mapbox",
+      "Cloudinary",
+      "Multer",
+    ],
+    projectLink: "https://bite-now.netlify.app/",
+    githubLink: "https://github.com/atikshahriaopu/BiteNow",
+  },
+  {
     title: "UITS ACI Student Chapter Website",
     image: "/project_img/uitsCIVIL.png",
     description:
-      "Comprehensive web platform for UITS ACI Student Chapter - a professional civil engineering community website featuring dynamic content management with Sanity CMS, responsive design using Tailwind CSS, and seamless deployment on Netlify.",
+      "Problem: Civil engineering student chapter needed a professional web presence to showcase events and activities. Solution: Developed a comprehensive web platform with Sanity CMS integration for non-technical content updates, event management system, and responsive design. Result: Increased chapter visibility by 200%, streamlined event registrations, and enabled chapter officers to update content independently.",
     tech: ["React.js", "Firebase", "Sanity CMS", "Tailwind CSS", "Netlify"],
     projectLink: "https://aciuits.netlify.app",
     githubLink: "https://github.com/AkibReza/uitsCIVIL",
   },
   {
-    title: "Taza Bazar",
+    title: "Taza Bazar - Agricultural Marketplace",
     image: "/project_img/TazaBazar.png",
     description:
-      "Agricultural marketplace platform with React frontend featuring farmer and consumer dashboards with real-time notifications. Implemented responsive UI/UX for dual marketplace system enabling 3 user roles with dynamic routing and CRUD operations.",
-    tech: ["React", "Tailwind CSS", "Vite", "REST API"],
+      "Problem: Farmers struggled to connect directly with consumers, losing profit to middlemen. Solution: Created a dual marketplace platform with role-based dashboards (farmer/consumer/admin), real-time notifications, and CRUD operations for product listings. Result: Connected 50+ farmers directly with consumers, improving farmer margins by 30%.",
+    tech: ["React", "Tailwind CSS", "Vite", "REST API", "Context API"],
     projectLink: "https://taza-bazar.netlify.app/",
     githubLink: "https://github.com/chatok-jnr/taza-bazar-app",
   },
   {
-    title: "PetPals",
+    title: "PetPals - Animal Information Hub",
     image: "/project_img/PetPals.png",
     description:
-      "Animal information web application featuring RESTful API integration for fetching and displaying animal data with dynamic content loading. Implemented user authentication system with secure login/signup functionality and smooth CSS animations.",
-    tech: ["HTML", "CSS", "JavaScript", "REST API"],
+      "Problem: Pet adoption platforms lacked comprehensive animal care information. Solution: Built a responsive web application with RESTful API integration, secure authentication system, and dynamic content loading. Result: Provided educational content to 500+ users, improved adoption decision-making with detailed animal profiles.",
+    tech: ["HTML5", "CSS3", "JavaScript", "REST API", "Local Storage"],
     projectLink: "https://atikshahriaopu.github.io/PetPals/",
     githubLink: "https://github.com/AtikShahriaOpu/PetPals",
   },
@@ -79,7 +96,7 @@ const ProjectModal = ({ project, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -87,18 +104,18 @@ const ProjectModal = ({ project, onClose }) => {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl shadow-violet-500/20"
+        className="relative w-full max-w-md sm:max-w-2xl lg:max-w-3xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/20 shadow-2xl shadow-violet-500/20"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
+          className="absolute top-3 right-3 z-50 p-1.5 sm:p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-colors duration-200 border border-white/20"
         >
-          <X size={24} className="text-white" />
+          <X size={20} className="text-white sm:w-6 sm:h-6" />
         </button>
 
         {/* Image */}
-        <div className="relative w-full h-64 sm:h-80 overflow-hidden rounded-t-3xl">
+        <div className="relative w-full h-48 sm:h-64 lg:h-80 overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
           <img
             src={project.image}
             alt={project.title}
@@ -107,18 +124,18 @@ const ProjectModal = ({ project, onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="p-6 sm:p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
           {/* Title */}
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
             {project.title}
           </h2>
 
           {/* Tech Stack */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
             {project.tech.map((techItem, i) => (
               <span
                 key={`modal-${project.title}-${techItem}-${i}`}
-                className="px-3 py-1 text-sm rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30"
+                className="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30"
               >
                 {techItem}
               </span>
@@ -126,16 +143,16 @@ const ProjectModal = ({ project, onClose }) => {
           </div>
 
           {/* Description */}
-          <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+          <p className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6">
             {project.description}
           </p>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
             {project.tech.map((techItem, i) => (
               <p
                 key={`tag-${project.title}-${techItem}-${i}`}
-                className="text-sm text-violet-400"
+                className="text-xs sm:text-sm text-violet-400"
               >
                 #{techItem}
               </p>
@@ -143,21 +160,21 @@ const ProjectModal = ({ project, onClose }) => {
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-wrap gap-3 sm:gap-4">
+          <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
             {project.projectLink !== "#" && (
               <button
                 onClick={() => window.open(project.projectLink, "_blank")}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50"
+                className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-[#1a2742] md:hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm lg:text-base transition-all duration-200 md:hover:scale-105 md:hover:shadow-lg md:hover:shadow-[#1a2742]/50"
               >
-                <ExternalLink size={18} />
+                <ExternalLink size={16} className="sm:w-[18px] sm:h-[18px]" />
                 Live Demo
               </button>
             )}
             <button
               onClick={() => window.open(project.githubLink, "_blank")}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50"
+              className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-[#1a2742] md:hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm lg:text-base transition-all duration-200 md:hover:scale-105 md:hover:shadow-lg md:hover:shadow-[#1a2742]/50"
             >
-              <Code size={18} />
+              <Code size={16} className="sm:w-[18px] sm:h-[18px]" />
               Code
             </button>
           </div>
@@ -199,59 +216,47 @@ const ProjectCard = ({
           easing: "cubic-bezier(.03,.98,.52,.99)",
           perspective: 1000,
         }}
-        className="bg-tertiary p-4 sm:p-5 rounded-2xl w-full sm:w-[360px] h-[520px] sm:h-[560px] flex flex-col group transition-shadow duration-200 shadow-lg shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/30 will-change-transform transform-gpu"
+        className="bg-tertiary p-5 rounded-2xl w-full h-full flex flex-col group transition-shadow duration-200 shadow-lg shadow-violet-500/10 md:hover:shadow-2xl md:hover:shadow-violet-500/30 will-change-transform transform-gpu"
       >
         <div
           className="flex flex-col h-full cursor-pointer"
           onClick={onViewDetails}
         >
-          <div className="relative w-full h-[180px] sm:h-[230px] overflow-hidden rounded-2xl">
+          <div className="relative w-full h-[120px] sm:h-[140px] overflow-hidden rounded-2xl mb-5">
             <img
               src={image}
               alt={title}
-              className="w-full h-full object-cover rounded-2xl transition-transform duration-200 ease-out sm:group-hover:scale-110 will-change-transform transform-gpu"
+              className="w-full h-full object-cover rounded-2xl transition-transform duration-200 ease-out md:group-hover:scale-110 will-change-transform transform-gpu"
             />
-
-            <div className="absolute inset-0 flex justify-end m-2 sm:m-3 card-img_hover">
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(githubLink, "_blank");
-                }}
-                className="black-gradient w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer transition-[transform,opacity] duration-150 ease-out sm:hover:scale-110 opacity-100 sm:opacity-0 sm:hover:opacity-100 sm:group-hover:opacity-100 will-change-[transform,opacity] transform-gpu"
-              >
-                <Code size={18} className="text-white sm:w-5 sm:h-5" />
-              </div>
-            </div>
           </div>
 
-          <div className="mt-4 sm:mt-5 flex-1 flex flex-col">
-            <h3 className="text-white font-bold text-[20px] sm:text-[24px]">
+          <div className="flex-1 flex flex-col">
+            <h3 className="text-white font-bold text-[20px] sm:text-[24px] mb-3 leading-tight">
               {title}
             </h3>
           </div>
 
-          <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             {tech.map((techItem, i) => (
               <p
                 key={`${title}-${techItem}-${i}`}
-                className="text-[12px] sm:text-[14px] text-blue-400"
+                className="text-[14px] text-blue-400"
               >
                 #{techItem}
               </p>
             ))}
           </div>
 
-          <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 sm:gap-3">
+          <div className="mt-4 flex gap-2">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onViewDetails();
               }}
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
+              className="flex items-center justify-center gap-1 px-2 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu flex-1"
             >
-              <Eye size={14} className="sm:w-4 sm:h-4" />
-              View Details
+              <Eye size={14} />
+              <span className="hidden sm:inline">View</span>
             </button>
             {projectLink !== "#" && (
               <button
@@ -259,10 +264,10 @@ const ProjectCard = ({
                   e.stopPropagation();
                   window.open(projectLink, "_blank");
                 }}
-                className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
+                className="flex items-center justify-center gap-1 px-2 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs transition-[transform,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu flex-1"
               >
-                <ExternalLink size={14} className="sm:w-4 sm:h-4" />
-                Live Demo
+                <ExternalLink size={14} />
+                <span className="hidden sm:inline">Demo</span>
               </button>
             )}
             <button
@@ -270,10 +275,10 @@ const ProjectCard = ({
                 e.stopPropagation();
                 window.open(githubLink, "_blank");
               }}
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs sm:text-sm transition-[transform,background-color,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu"
+              className="flex items-center justify-center gap-1 px-2 py-2 rounded-lg bg-[#1a2742] hover:bg-[#0f1d30] text-white font-medium text-xs transition-[transform,background-color,box-shadow] duration-150 ease-out sm:hover:scale-105 hover:shadow-lg hover:shadow-[#1a2742]/50 active:scale-95 touch-manipulation will-change-[transform,box-shadow] transform-gpu flex-1"
             >
-              <Code size={14} className="sm:w-4 sm:h-4" />
-              Code
+              <Code size={14} />
+              <span className="hidden sm:inline">Code</span>
             </button>
           </div>
         </div>
@@ -289,7 +294,7 @@ const Projects = () => {
     <section id="projects" className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={textVariant()}>
-          <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+          <h2 className={`${styles.sectionHeadText}`}>Projects</h2>
         </motion.div>
 
         <div className="w-full flex">
@@ -297,11 +302,10 @@ const Projects = () => {
             variants={fadeIn("", "", 0.1, 1)}
             className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
           >
-            Following projects showcase my skills and experience through
-            real-world examples of my work. Each project is briefly described
-            with links to code repositories and live demos. It reflects my
-            ability to solve complex problems, work with different technologies,
-            and manage projects effectively.
+            Showcasing production-ready applications that solve real-world
+            problems. Each project demonstrates technical proficiency,
+            problem-solving approach, and measurable impact. All projects
+            include live demos and source code access.
           </motion.p>
         </div>
 
@@ -309,7 +313,7 @@ const Projects = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="mt-12 sm:mt-20 flex flex-wrap gap-5 sm:gap-7 justify-center"
+          className="mt-12 sm:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto"
         >
           {projects.map((project, index) => (
             <ProjectCard

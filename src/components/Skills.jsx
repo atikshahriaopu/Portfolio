@@ -1,6 +1,5 @@
-import { motion, useAnimation, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
-import { useEffect, useRef, useState } from "react";
 import { styles } from "../styles";
 
 const fadeIn = (direction, type, delay, duration) => {
@@ -44,132 +43,54 @@ const textVariant = (delay) => {
 
 const Skills = () => {
   const { sectionRef } = useScrollAnimation();
-  const [isDragging, setIsDragging] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const x = useMotionValue(0);
-  const controls = useAnimation();
-  const containerRef = useRef(null);
-  const animationRef = useRef(null);
 
-  const techSkills = [
-    { name: "C", image: "/Image/c.png" },
-    { name: "C++", image: "/Image/cpp.png" },
-    { name: "JavaScript", image: "/Image/js.png" },
-    { name: "Node.js", image: "/Image/node-js.png" },
-    { name: "Express.js", image: "/Image/express.png" },
-    { name: "Mongoose", image: "/Image/mongoose.png" },
-    { name: "MongoDB", image: "/Image/mongodb.png" },
-    { name: "Firebase", image: "/Image/firebase.png" },
-    { name: "Sanity CMS", image: "/Image/Sanity.png" },
-    { name: "Postman", image: "/Image/postman.png" },
-    { name: "Git/Github", image: "/Image/git.png" },
-    { name: "AI", image: "/Image/AI.png" },
-  ];
-
-  const domainSkills = [
+  const skillCategories = [
     {
-      name: "Data Structure",
-      image: "/Image/data_structure.png",
+      title: "Languages",
+      skills: [
+        { name: "C++", image: "/Image/cpp.png" },
+        { name: "JavaScript", image: "/Image/js.png" },
+        { name: "C", image: "/Image/c.png" },
+      ],
     },
     {
-      name: "OOP",
-      image: "/Image/oop.png",
+      title: "Backend Technologies",
+      skills: [
+        { name: "Node.js", image: "/Image/node-js.png" },
+        { name: "Express", image: "/Image/express.png" },
+        { name: "Mongoose", image: "/Image/mongoose.png" },
+      ],
     },
     {
-      name: "Algorithms",
-      image: "/Image/algorithm.png",
+      title: "Database & Cloud",
+      skills: [
+        { name: "MongoDB", image: "/Image/mongodb.png" },
+        { name: "Firebase", image: "/Image/firebase.png" },
+        { name: "Cloudinary", image: "/Image/cloud.png" },
+      ],
     },
     {
-      name: "Problem Solving",
-      image: "/Image/problem-solving.png",
+      title: "Tools & Others",
+      skills: [
+        { name: "Git", image: "/Image/git.png" },
+        { name: "Postman", image: "/Image/postman.png" },
+        { name: "Socket.IO", image: "/Image/socket.png" },
+        { name: "Mapbox", image: "/Image/mapbox.png" },
+        { name: "Multer", image: "/Image/multer.png" },
+      ],
     },
   ];
-
-  // Combine tech and domain skills
-  const allSkills = [...techSkills, ...domainSkills];
-
-  // Create a circular array with enough copies for infinite seamless loop
-  const duplicatedSkills = [
-    ...allSkills,
-    ...allSkills,
-    ...allSkills,
-    ...allSkills,
-    ...allSkills,
-    ...allSkills,
-    ...allSkills,
-    ...allSkills,
-  ];
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const itemWidth = 112; // Adjusted for mobile: smaller item width (80px) + gap (32px)
-    const singleSetWidth = allSkills.length * itemWidth;
-
-    const startAutoScroll = () => {
-      const currentX = x.get();
-
-      // Animate one full set of skills
-      animationRef.current = controls
-        .start({
-          x: currentX - singleSetWidth,
-          transition: {
-            duration: allSkills.length * 2.5, // Smooth consistent speed
-            ease: "linear",
-          },
-        })
-        .then(() => {
-          // Seamlessly loop by resetting position to middle copies
-          const newX = x.get() % -singleSetWidth;
-          const middleOffset = -singleSetWidth * 3;
-          x.set(newX + middleOffset);
-          if (!isDragging && !isHovering) {
-            startAutoScroll();
-          }
-        });
-    };
-
-    if (!isDragging && !isHovering) {
-      startAutoScroll();
-    } else {
-      controls.stop();
-    }
-
-    return () => {
-      if (animationRef.current) {
-        controls.stop();
-      }
-    };
-  }, [isDragging, isHovering, controls, allSkills.length, x]);
-
-  const handleDragStart = () => {
-    setIsDragging(true);
-    controls.stop();
-  };
-
-  const handleDragEnd = () => {
-    setIsDragging(false);
-    // Normalize position after dragging to ensure seamless loop
-    const itemWidth = 112; // Match the itemWidth from useEffect
-    const singleSetWidth = allSkills.length * itemWidth;
-    const currentX = x.get();
-
-    // Calculate normalized position within the middle sets (never at edges)
-    const normalizedX = currentX % -singleSetWidth;
-    const middleOffset = -singleSetWidth * 3; // Keep in middle copies
-    x.set(normalizedX + middleOffset);
-  };
 
   return (
     <section
       ref={sectionRef}
       id="skills"
-      className="pt-32 sm:pt-40 md:pt-48 lg:pt-56 pb-10 sm:pb-12 md:pb-18 relative overflow-hidden"
+      className="pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-10 sm:pb-12 md:pb-18 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
         <motion.div variants={textVariant()}>
           <h2 className={`${styles.sectionHeadText}`}>
-            Skills & Technologies.
+            Skills & Technologies
           </h2>
         </motion.div>
 
@@ -178,61 +99,62 @@ const Skills = () => {
             variants={fadeIn("", "", 0.1, 1)}
             className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
           >
-            These are the technologies and tools I work with regularly. From
-            programming languages to frameworks and databases, each skill
-            represents hands-on experience in building real-world applications
-            and solving complex problems.
+            A backend developer and competitive problem-solver with production
+            experience, specializing in scalable system architecture, algorithm
+            optimization, and modern development practices. Combines strong
+            computer science fundamentals with practical software engineering
+            skills.
           </motion.p>
         </div>
 
-        {/* Scrolling Skills Container */}
+        {/* Categorized Skills */}
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="relative overflow-hidden mt-20"
+          variants={fadeIn("up", "spring", 0.2, 0.75)}
+          className="mt-12 sm:mt-16 md:mt-20 space-y-10 sm:space-y-12 md:space-y-16"
         >
-          <motion.div
-            ref={containerRef}
-            drag="x"
-            dragConstraints={false}
-            dragElastic={0}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            animate={controls}
-            style={{ x }}
-            className="flex gap-4 sm:gap-6 md:gap-8 py-6 sm:py-8 cursor-grab active:cursor-grabbing"
-          >
-            {duplicatedSkills.map((skill, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.1, y: -5 }}
-                transition={{ duration: 0.3 }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-                className="flex-shrink-0 flex flex-col items-center group cursor-pointer w-20 sm:w-24 md:w-32"
-              >
-                {/* Image Container */}
-                <div className="relative mb-2 sm:mb-3">
-                  <div className="transform group-hover:scale-110 transition-all duration-300 filter drop-shadow-lg group-hover:drop-shadow-2xl">
-                    <img
-                      src={skill.image}
-                      alt={skill.name}
-                      className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain pointer-events-none"
-                      draggable="false"
-                    />
-                  </div>
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-20 blur-xl rounded-full transition-opacity duration-300"></div>
-                </div>
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              variants={fadeIn("up", "spring", categoryIndex * 0.1, 0.5)}
+              className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 sm:gap-8 md:gap-12 items-start"
+            >
+              <h3 className="text-2xl sm:text-3xl font-bold text-white self-center">
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-6 sm:gap-8 md:gap-10">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skill.name}
+                    variants={fadeIn("up", "spring", skillIndex * 0.05, 0.5)}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col items-center group cursor-pointer"
+                  >
+                    {/* Image Container */}
+                    <div className="relative mb-3 sm:mb-4">
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl bg-gradient-to-br from-tertiary/30 to-tertiary/10 backdrop-blur-sm border border-white/10 flex items-center justify-center transform md:group-hover:scale-110 transition-all duration-300 filter drop-shadow-lg md:group-hover:drop-shadow-2xl">
+                        <img
+                          src={skill.image}
+                          alt={skill.name}
+                          className="w-12 h-12 sm:w-16 sm:h-16 md:w-18 md:h-18 object-contain"
+                        />
+                      </div>
+                      {/* Glow effect on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 md:group-hover:opacity-20 blur-xl rounded-2xl transition-opacity duration-300"></div>
+                    </div>
 
-                {/* Skill Name */}
-                <p className="text-xs sm:text-sm md:text-base font-medium text-solarized-base1 group-hover:text-solarized-cyan transition-colors duration-300 text-center">
-                  {skill.name}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+                    {/* Skill Name */}
+                    <p className="text-sm sm:text-base md:text-lg font-medium text-secondary md:group-hover:text-white transition-colors duration-300 text-center">
+                      {skill.name}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
