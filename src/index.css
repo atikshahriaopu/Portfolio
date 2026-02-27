@@ -120,6 +120,24 @@
     }
   }
 
+  @keyframes fadeInBackdrop {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
   @keyframes scaleIn {
     from {
       opacity: 0;
@@ -204,7 +222,8 @@
     border-radius: 1rem;
     padding: 1px;
     background: linear-gradient(135deg, #268bd2, #2aa198);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;

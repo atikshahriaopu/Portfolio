@@ -51,6 +51,7 @@ const Skills = () => {
         { name: "C++", image: "/Image/cpp.png" },
         { name: "JavaScript", image: "/Image/js.png" },
         { name: "C", image: "/Image/c.png" },
+        { name: "Java", image: "/Image/java.png" },
       ],
     },
     {
@@ -99,9 +100,9 @@ const Skills = () => {
             variants={fadeIn("", "", 0.1, 1)}
             className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
           >
-            A backend developer and competitive problem-solver with production
-            experience, specializing in scalable system architecture, algorithm
-            optimization, and modern development practices. Combines strong
+            I am a backend developer and competitive problem-solver with production
+            experience. I specialize in scalable system architecture, algorithm
+            optimization, and modern development practices. I combine strong
             computer science fundamentals with practical software engineering
             skills.
           </motion.p>

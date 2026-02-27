@@ -291,7 +291,7 @@ const GitHub = () => {
               GitHub Contributions
             </h2>
           </div>
-          <p className="text-solarized-base01 text-xs sm:text-sm mt-2">
+          <p className="text-base sm:text-lg text-solarized-base1 leading-relaxed">
             My coding journey visualized through contributions and achievements
           </p>
         </motion.div>

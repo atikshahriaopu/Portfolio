@@ -101,16 +101,6 @@ const Experience = () => {
           <h2 className={`${styles.sectionHeadText}`}>Experience</h2>
         </motion.div>
 
-        <div className="w-full flex">
-          <motion.p
-            variants={fadeIn("", "", 0.1, 1)}
-            className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-          >
-            Professional experience and mentorship roles that showcase my
-            commitment to software development and community contribution.
-          </motion.p>
-        </div>
-
         <motion.div
           variants={containerVariants}
           initial="hidden"

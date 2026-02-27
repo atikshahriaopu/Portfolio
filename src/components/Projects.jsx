@@ -49,7 +49,23 @@ const projects = [
     title: "BiteNow - Food Delivery Platform",
     image: "/project_img/bitenow.png",
     description:
-      "Production-grade food delivery platform developed during industrial attachment at Brain Station 23. Built RESTful APIs for rider management, restaurant owner module with complete CRUD operations, and real-time location tracking. Integrated Cloudinary for media management and Mapbox API with Socket.IO for live rider-customer communication. Streamlined delivery workflows with secure database transactions.",
+      "Problem: Food delivery platforms require complex backend systems for managing restaurants, riders, and real-time order tracking.\n\n" +
+      "Solution: Developed production-grade backend APIs during industrial attachment at Brain Station 23 for a full-scale food delivery platform.\n\n" +
+      "Key Technical Achievements:\n\n" +
+      "🔹 RESTful API Architecture\n" +
+      "• Built modular CRUD APIs for Restaurant Owner, Restaurant, and Rider management\n" +
+      "• Implemented document verification workflows and status management systems\n" +
+      "• Designed advanced query engine with pagination, sorting, and filtering\n\n" +
+      "🔹 Database & Geospatial Systems\n" +
+      "• MongoDB database design with GeoJSON schema for location-based queries\n" +
+      "• Built aggregation pipelines for real-time analytics (revenue, orders, ratings)\n" +
+      "• Integrated Mapbox API for geocoding and distance-based restaurant/rider matching\n\n" +
+      "🔹 Real-Time Features\n" +
+      "• WebSocket implementation (Socket.IO) for live order tracking and notifications\n" +
+      "• Rider location broadcasting with ETA calculations\n\n" +
+      "🔹 Cloud Integration\n" +
+      "• Cloudinary + Multer for image/document uploads with validation and optimization\n\n" +
+      "Result: Delivered scalable backend supporting restaurant onboarding, order management, and real-time rider tracking with optimized geospatial queries.",
     tech: [
       "Node.js",
       "Express",
@@ -66,7 +82,7 @@ const projects = [
     title: "UITS ACI Student Chapter Website",
     image: "/project_img/uitsCIVIL.png",
     description:
-      "Problem: Civil engineering student chapter needed a professional web presence to showcase events and activities. Solution: Developed a comprehensive web platform with Sanity CMS integration for non-technical content updates, event management system, and responsive design. Result: Increased chapter visibility by 200%, streamlined event registrations, and enabled chapter officers to update content independently.",
+      "Problem: Civil engineering student chapter needed a professional web presence to showcase events and activities.\n\nSolution: Developed a comprehensive web platform with Sanity CMS integration for non-technical content updates, event management system, and responsive design.\n\nResult: Increased chapter visibility by 200%, streamlined event registrations, and enabled chapter officers to update content independently.",
     tech: ["React.js", "Firebase", "Sanity CMS", "Tailwind CSS", "Netlify"],
     projectLink: "https://aciuits.netlify.app",
     githubLink: "https://github.com/AkibReza/uitsCIVIL",
@@ -75,7 +91,7 @@ const projects = [
     title: "Taza Bazar - Agricultural Marketplace",
     image: "/project_img/TazaBazar.png",
     description:
-      "Problem: Farmers struggled to connect directly with consumers, losing profit to middlemen. Solution: Created a dual marketplace platform with role-based dashboards (farmer/consumer/admin), real-time notifications, and CRUD operations for product listings. Result: Connected 50+ farmers directly with consumers, improving farmer margins by 30%.",
+      "Problem: Farmers struggled to connect directly with consumers, losing profit to middlemen.\n\nSolution: Created a dual marketplace platform with role-based dashboards (farmer/consumer/admin), real-time notifications, and CRUD operations for product listings.\n\nResult: Connected 50+ farmers directly with consumers, improving farmer margins by 30%.",
     tech: ["React", "Tailwind CSS", "Vite", "REST API", "Context API"],
     projectLink: "https://taza-bazar.netlify.app/",
     githubLink: "https://github.com/chatok-jnr/taza-bazar-app",
@@ -84,7 +100,7 @@ const projects = [
     title: "PetPals - Animal Information Hub",
     image: "/project_img/PetPals.png",
     description:
-      "Problem: Pet adoption platforms lacked comprehensive animal care information. Solution: Built a responsive web application with RESTful API integration, secure authentication system, and dynamic content loading. Result: Provided educational content to 500+ users, improved adoption decision-making with detailed animal profiles.",
+      "Problem: Pet adoption platforms lacked comprehensive animal care information.\n\nSolution: Built a responsive web application with RESTful API integration, secure authentication system, and dynamic content loading.\n\nResult: Provided educational content to 500+ users, improved adoption decision-making with detailed animal profiles.",
     tech: ["HTML5", "CSS3", "JavaScript", "REST API", "Local Storage"],
     projectLink: "https://atikshahriaopu.github.io/PetPals/",
     githubLink: "https://github.com/AtikShahriaOpu/PetPals",
@@ -143,9 +159,46 @@ const ProjectModal = ({ project, onClose }) => {
           </div>
 
           {/* Description */}
-          <p className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6">
-            {project.description}
-          </p>
+          <div className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6">
+            {project.description.split("\n").map((line, index) => {
+              const trimmedLine = line.trim();
+
+              // Empty line - vertical spacing
+              if (trimmedLine === "") {
+                return <div key={index} className="h-2" />;
+              }
+
+              // Bullet point - use flexbox for proper alignment
+              if (trimmedLine.startsWith("•")) {
+                return (
+                  <div key={index} className="flex items-start gap-2 mb-2 ml-4">
+                    <span className="text-gray-300 flex-shrink-0 leading-relaxed">
+                      •
+                    </span>
+                    <span className="flex-1 leading-relaxed">
+                      {trimmedLine.substring(1).trim()}
+                    </span>
+                  </div>
+                );
+              }
+
+              // Section header (starts with emoji)
+              if (trimmedLine.startsWith("🔹")) {
+                return (
+                  <p key={index} className="font-semibold mb-2 mt-4 first:mt-0">
+                    {trimmedLine}
+                  </p>
+                );
+              }
+
+              // Regular paragraph
+              return (
+                <p key={index} className="mb-2">
+                  {trimmedLine}
+                </p>
+              );
+            })}
+          </div>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
@@ -296,18 +349,6 @@ const Projects = () => {
         <motion.div variants={textVariant()}>
           <h2 className={`${styles.sectionHeadText}`}>Projects</h2>
         </motion.div>
-
-        <div className="w-full flex">
-          <motion.p
-            variants={fadeIn("", "", 0.1, 1)}
-            className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-          >
-            Showcasing production-ready applications that solve real-world
-            problems. Each project demonstrates technical proficiency,
-            problem-solving approach, and measurable impact. All projects
-            include live demos and source code access.
-          </motion.p>
-        </div>
 
         <motion.div
           initial="hidden"

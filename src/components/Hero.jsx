@@ -75,11 +75,6 @@ const Hero = () => {
               {text}
               <span className="animate-pulse text-solarized-cyan">|</span>
             </p>
-            <p className="text-solarized-base1 text-[14px] xs:text-[16px] sm:text-[18px] lg:text-[20px] leading-[22px] xs:leading-[24px] sm:leading-[28px] lg:leading-[32px] mt-4 max-w-3xl">
-              Backend Developer specializing in scalable web applications. 1200+
-              problems solved | Building efficient solutions with Node.js,
-              Express, and MongoDB.
-            </p>
             <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 sm:mt-8">
               <a
                 href="/CV/Atik_Shahria_Opu_Resume.pdf"

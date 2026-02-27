@@ -69,18 +69,6 @@ const Education = () => {
           <h2 className={`${styles.sectionHeadText}`}>Education</h2>
         </motion.div>
 
-        <div className="w-full flex">
-          <motion.p
-            variants={fadeIn("", "", 0.1, 1)}
-            className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-          >
-            My academic background in Computer Science & Engineering has
-            provided me with a strong foundation in software development,
-            algorithms, and problem-solving. Here&apos;s my educational journey
-            and key coursework that shaped my technical skills.
-          </motion.p>
-        </div>
-
         <motion.div
           initial="hidden"
           whileInView="show"

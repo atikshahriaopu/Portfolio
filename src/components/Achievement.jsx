@@ -115,7 +115,7 @@ const Achievement = () => {
           <h2 className={`${styles.sectionHeadText}`}>Achievements</h2>
         </motion.div>
 
-        <div className="w-full flex">
+        {/* <div className="w-full flex">
           <motion.p
             variants={fadeIn("", "", 0.1, 1)}
             className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
@@ -124,7 +124,7 @@ const Achievement = () => {
             through three consecutive ICPC qualifications and top-tier
             university rankings, showcasing dedication and technical excellence.
           </motion.p>
-        </div>
+        </div> */}
 
         <motion.div
           variants={containerVariants}
