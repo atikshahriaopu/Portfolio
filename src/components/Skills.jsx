@@ -60,6 +60,7 @@ const Skills = () => {
         { name: "Node.js", image: "/Image/node-js.png" },
         { name: "Express", image: "/Image/express.png" },
         { name: "Mongoose", image: "/Image/mongoose.png" },
+        { name: "REST APIs", image: "/Image/api.png" },
       ],
     },
     {

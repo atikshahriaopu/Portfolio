@@ -46,6 +46,14 @@ const textVariant = (delay) => {
 
 const projects = [
   {
+    title: "AuthCore - Authentication System",
+    image: "/project_img/AuthCore.png",
+    description:"Problem: Many applications require a secure and scalable authentication system.\n\nSolution: Developed a modular authentication system with JWT-based token management, role-based access control, and password hashing.\n\nResult: Provided a reusable authentication solution that can be integrated into various applications, enhancing security and user management.",
+    tech: ["Spring Boot", "Spring Security", "JWT", "JPA", "PostgreSQL", "Bcrypt"],
+    projectLink: "#",
+    githubLink: "https://github.com/atikshahriaopu/AuthCore/tree/main"
+  },
+  {
     title: "BiteNow - Food Delivery Platform",
     image: "/project_img/bitenow.png",
     description:
@@ -104,7 +112,7 @@ const projects = [
     tech: ["HTML5", "CSS3", "JavaScript", "REST API", "Local Storage"],
     projectLink: "https://atikshahriaopu.github.io/PetPals/",
     githubLink: "https://github.com/AtikShahriaOpu/PetPals",
-  },
+  }
 ];
 
 const ProjectModal = ({ project, onClose }) => {
