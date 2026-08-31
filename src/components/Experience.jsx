@@ -49,13 +49,13 @@ const Experience = () => {
     {
       title: "Backend Engineer Intern - Brain Station 23",
       team: "Industrial Attachment | Contributed to BiteNow backend development • Implemented secure RESTful APIs with Node.js, Express, MongoDB • Worked with Cloudinary, Mapbox, Socket.IO, and database transactions • Collaborated in a Git-based professional team environment",
-      icon: "💼",
+      icon: "/Image/bs23.png",
       year: "Dec 2025",
       gradient: "from-white to-white",
     },
     {
       title: "Competitive Programming Mentor",
-      team: "Mentored 20+ junior students in DSA and algorithms | Helped 5 students achieve Specialist rank on Codeforces, improved average solve rate by 40%",
+      team: "Mentored 20+ junior students in DSA and algorithms. • Conducted weekly sessions and code reviews to enhance problem-solving skills • Guided students in preparing for coding competitions.",
       icon: "👨‍🏫",
       year: "Ongoing",
       gradient: "from-white to-white",

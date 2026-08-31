@@ -50,8 +50,8 @@ const Skills = () => {
       skills: [
         { name: "C++", image: "/Image/cpp.png" },
         { name: "JavaScript", image: "/Image/js.png" },
-        { name: "C", image: "/Image/c.png" },
         { name: "Java", image: "/Image/java.png" },
+        { name: "SQL", image: "/Image/sql.png" },
       ],
     },
     {
@@ -68,6 +68,8 @@ const Skills = () => {
       skills: [
         { name: "MongoDB", image: "/Image/mongodb.png" },
         { name: "Firebase", image: "/Image/firebase.png" },
+        { name: "PostgreSQL", image: "/Image/PostgreSQL.png" },
+        { name: "MySQL", image: "/Image/mysql.png" },
         { name: "Cloudinary", image: "/Image/cloud.png" },
       ],
     },
@@ -79,6 +81,7 @@ const Skills = () => {
         { name: "Socket.IO", image: "/Image/socket.png" },
         { name: "Mapbox", image: "/Image/mapbox.png" },
         { name: "Multer", image: "/Image/multer.png" },
+        { name: "Codex", image: "/Image/Codex.png" },
       ],
     },
   ];

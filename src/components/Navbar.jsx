@@ -44,7 +44,7 @@ const Navbar = ({
                 );
               })}
               <a
-                href="/CV/Atik_Shahria_Opu.pdf"
+                href="/CV/Atik_Shahria_Opu_Resume.pdf"
                 download="Atik_Shahria_Opu_Resume.pdf"
                 className="flex items-center gap-1.5 px-5 py-2 bg-solarized-violet text-white font-medium text-sm rounded-full xl:hover:shadow-lg xl:hover:shadow-solarized-violet/50 transition-all duration-300 transform xl:hover:scale-105 ml-2"
               >
@@ -125,7 +125,7 @@ const Navbar = ({
             {/* Download Resume Button */}
             <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-gradient-to-t from-[#060817] to-transparent">
               <a
-                href="/CV/Atik_Shahria_Opu.pdf"
+                href="/CV/Atik_Shahria_Opu_Resume.pdf"
                 download="Atik_Shahria_Opu_Resume.pdf"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3.5 bg-gradient-to-r from-solarized-violet to-solarized-blue text-white font-semibold text-base rounded-xl shadow-lg shadow-solarized-violet/30 hover:shadow-solarized-violet/50 hover:scale-105 transition-all duration-300"
               >
