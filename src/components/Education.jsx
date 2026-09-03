@@ -152,7 +152,7 @@ const Education = () => {
                   transition={{ duration: 0.6, delay: 0.7 }}
                   className="text-secondary text-[14px] mb-4"
                 >
-                  Dhaka, Bangladesh • Expected Graduation: 2026
+                  Dhaka, Bangladesh • Graduated: August 2026
                 </motion.p>
 
                 <motion.div

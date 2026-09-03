@@ -87,6 +87,25 @@ const projects = [
     githubLink: "https://github.com/atikshahriaopu/BiteNow",
   },
   {
+  title: "HopeHub - Disaster Response Coordination Platform",
+  image: "/project_img/HopeHub.png",
+  description:
+    "Problem: Disaster relief efforts often suffered from poor coordination between NGOs and volunteers, delayed response times, and difficulty matching skills with urgent needs.\n\nSolution: Built a responsive full-stack platform that connects NGOs and volunteers through role-based dashboards, mission management, emergency alerts, relief maps, messaging, and resource coordination.\n\nResult: Streamlined disaster-response workflows by helping organizations manage missions and resources while enabling volunteers to discover and respond to urgent opportunities.",
+  tech: [
+    "React",
+    "Tailwind CSS",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "REST API",
+    "JWT Authentication",
+    "Bcrypt",
+    "Socket.IO"
+  ],
+  projectLink: "",
+  githubLink: "https://github.com/atikshahriaopu/HH-HopeHub/tree/main",
+},
+  {
     title: "UITS ACI Student Chapter Website",
     image: "/project_img/uitsCIVIL.png",
     description:
